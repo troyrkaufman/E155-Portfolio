@@ -1,0 +1,13 @@
+---
+title: "Hello Quarto"
+description: "Welcome to my Quarto portfolio"
+author: "Troy Kaufman"
+date: "8/27/24"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+
+Hi everyone! My name is Troy!
