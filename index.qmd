@@ -12,6 +12,6 @@ about:
           href: https://github.com/troyrkaufman
 ---
 
-Hi, my name is Troy Kaufman and I'm a junior at Harvey Mudd College. I'm a general engineering major with an interest in digital design and computer architecture. As an intern with The Aerospace Corporation this past summer, I worked on facilitating communication between an FPGA and SPI NOR flash memory. Additionally, I designed an FPGA subsystem that monitored and replied to a proprietary satellite interface. My hobbies include playing disc golf, scripted wrestling, and building weird devices with my school friends. 
+Hi, my name is Troy Kaufman and I'm a junior at Harvey Mudd College. I'm a general engineering major with an interest in digital design and computer architecture. As an intern with The Aerospace Corporation this past summer, I worked on facilitating communication between an FPGA and SPI NOR flash memory. Additionally, I designed an FPGA subsystem that monitored and replied to a proprietary satellite interface. My hobbies include playing disc golf, scripted wrestling, and building weird devices with my friends. 
 
 
