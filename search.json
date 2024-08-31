@@ -1,10 +1,24 @@
 [
   {
+    "objectID": "posts/week1_reflections.html",
+    "href": "posts/week1_reflections.html",
+    "title": "Week 1 Reflections",
+    "section": "",
+    "text": "I soldered surface mount and through hole components on the MicroPs development board. To test the board, I flashed simple programs on the FPGA and MCU to establish viewable communication between the two."
+  },
+  {
+    "objectID": "posts/week1_reflections.html#summary",
+    "href": "posts/week1_reflections.html#summary",
+    "title": "Week 1 Reflections",
+    "section": "",
+    "text": "I soldered surface mount and through hole components on the MicroPs development board. To test the board, I flashed simple programs on the FPGA and MCU to establish viewable communication between the two."
+  },
+  {
     "objectID": "posts/week1_reflections.html#reflections",
     "href": "posts/week1_reflections.html#reflections",
     "title": "Week 1 Reflections",
     "section": "Reflections",
-    "text": "Reflections"
+    "text": "Reflections\nSoldering surface mounted parts provided me with a new challenge that was quite exciting and frustrating simultaneously. I enjoyed Radiant’s intuitive FPGA design flow process compared to other IDE synthesizers like Xilinx Vivado."
   },
   {
     "objectID": "index.html",
