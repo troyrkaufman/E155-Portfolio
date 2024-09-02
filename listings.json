@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/lab1.html",
       "/posts/week1_reflections.html",
       "/posts/first-post.html"
     ]
