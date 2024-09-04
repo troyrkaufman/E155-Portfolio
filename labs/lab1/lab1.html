@@ -172,11 +172,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="design" class="level1">
 <h1>Design</h1>
-<p>The first aspect to consider in the project was separating the design approaches for the two main goals: blinking an LED and driving a seven segment display. A top module would instantiate these two designs along with providing the high speed oscillator developed by Lattice Radiant as seen in the BLOCK DIAGRAM BELOW.</p>
+<p>The first aspect to consider in the project was separating the design approaches for the two main goals: blinking an LED and driving a seven segment display. A top module would instantiate these two designs along with providing the high speed oscillator (48 MHz) developed by Lattice Radiant as seen in the BLOCK DIAGRAM BELOW.</p>
 <div id="block_diagram">
 <p>![Block Diagram][e155_lab1_block_diagram.jpg] Figure 1: System Block Diagram</p>
 </div>
-<p>The seven segment display could be handled by strictly utilizing combinational logic via a case statement to manipulate the seven bit signals. As for the blinking LED, a counter was used to delay driving LED. The calculation is the following: ADD</p>
+<p>The seven segment display source code could be handled by strictly utilizing combinational logic via a case statement to manipulate the seven bit signals. The seven segment display was cathode driven so Vcc was supplied power to the common anode while the seven bit signals were attatched via current limiting resistors to the display. The calculation for the resistor values is as follows: ADD BELOW EQUATION AND SCHEMATIC</p>
+<p>As for the blinking LED, a counter was used to delay setting the LED. The calculation is the following: ADD BELOW CALCULATION</p>
+<p>Counter Limit = (Clock Frequency)/(2.4 * 2)</p>
+<p>This sets the LED to blink at a 50% duty cycle at 4.8 Hz producing the 2.4 Hz signal. A reset signal would initialize the counter and LED state to 0 and off respectively. Until the counter reached the desired limit, counter increments by 1 and the LED retains its value on each clock cycle. Once the limit is hit, the counter is reset and the LED’s value is negated thus turning on/off at the desired freqeuncy. The oscilloscope image below shows that the LED was blinking at 2.404 Hz - well within the vicinity to be considered acceptable. ADD BELOW</p>
+<p>The additional goals included driving XOR and AND logic on LEDs which were produced by assign statements following the counter source code.</p>
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
