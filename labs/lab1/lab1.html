@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Troy Kaufman">
-<meta name="dcterms.date" content="2024-09-02">
+<meta name="dcterms.date" content="2024-09-03">
 <meta name="description" content="Lab 1">
 
-<title>Time Multiplexing – E155 Portfolio</title>
+<title>Seven Segement Display and LED logic – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,15 +114,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Time Multiplexing</h1>
+<h1 class="title">Seven Segement Display and LED logic</h1>
 </div>
 
 <div>
@@ -144,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 2, 2024</p>
+      <p class="date">September 3, 2024</p>
     </div>
   </div>
   
@@ -156,9 +164,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is lab 1!!!!!</p>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Lab 1 introduced students to the digital design world by giving them experience with the FPGA design flow from creating block diagrams to synthesizing hardware on an FPGA. The main goals of this lab was to produce a 2.4 Hz blinking LED along with driving other LEDs based on XOR and AND logic. Additionally, a seven segment display would illustrate the current hexadecimal number input from the DIP switches located on the development board.</p>
+<p>Several SystemVerilog modules produced the necessary logic to perform the requirements, and circuit analysis was used to calculate components to drive the seven segment display according to the Specs sheet.</p>
+<p>Overall, this lab took 9 hours to finish which included soldering the development board together and fixing ST-link/J-link issues.</p>
+</section>
+<section id="design" class="level1">
+<h1>Design</h1>
+</section>
+<section id="verification" class="level1">
+<h1>Verification</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
