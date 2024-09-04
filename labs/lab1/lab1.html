@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>Design</h1>
 <p>The first aspect to consider in the project was separating the design approaches for the two main goals: blinking an LED and driving a seven segment display. A top module would instantiate these two designs named led_controller and seg_decoder along with providing the high speed oscillator (48 MHz) developed by Lattice Radiant as seen in the BLOCK DIAGRAM BELOW.</p>
 <div id="block_diagram">
-<p>![][e155_lab1_block_diagram.jpeg] Figure 1: System Block Diagram</p>
+<p>![][images/headshot.jpeg] Figure 1: System Block Diagram</p>
 </div>
 <p>The seven segment display source code (seg_decoder) could be handled by strictly utilizing combinational logic via a case statement to manipulate the seven bit signals. The seven segment display was cathode driven so Vcc supplied power to the common anode while the seven bit signals were attatched via current limiting resistors to the display. The calculation for the resistor values is as follows: ADD BELOW EQUATION AND SCHEMATIC</p>
 <p>As for the blinking LED (led_controller), a counter was used to delay setting the LED. The calculation is the following: ADD BELOW CALCULATION</p>
