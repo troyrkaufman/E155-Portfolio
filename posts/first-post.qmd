@@ -1,6 +1,6 @@
 ---
 title: "Hello Quarto"
-description: "Welcome to my Quarto portfolio"
+description: "Week 1 Update"
 author: "Troy Kaufman"
 date: "8/27/24"
 categories:

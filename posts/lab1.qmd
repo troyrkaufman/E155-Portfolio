@@ -1,0 +1,14 @@
+---
+title: "Configuring LEDs and Seven Segment Display"
+description: "Lab 1 Report and Reflection"
+author: "Troy Kaufman"
+date: "9/2/24"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+Hi all! I recently finsihed the first lab in MicroPs, and it was overwhelmingly satisfying to see my hardwork pour into
+a successful project. Despite the premise being to turn on LEDs in various fashions, the lab was gruelling in some aspects. 
+This lab was a neat introduction to the digital design world.

@@ -1,0 +1,16 @@
+---
+title: "Week 1 Reflections"
+description: "Built my development board and began to program in SystemVerilog"
+author: "Troy Kaufman"
+date: "8/30/24"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+## Summary
+I soldered surface mount and through hole components on the MicroPs development board. To test the board, I flashed simple programs on the FPGA and MCU to establish viewable communication between the two. 
+
+## Reflections
+Soldering surface mounted parts provided me with a new challenge that was quite exciting and frustrating simultaneously. I enjoyed Radiant's intuitive FPGA design flow process compared to other IDE synthesizers like Xilinx Vivado. 
