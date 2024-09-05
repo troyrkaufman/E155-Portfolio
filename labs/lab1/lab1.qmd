@@ -29,7 +29,7 @@ Where Vcc is the voltage source, Vd is the voltage drop across the LED, I is the
 
 ![System Schematic](images/lab1_schematic.jpg)
 
-The DIP switches, push button, and LEDs with current limiting resistors are shown in Prof. Brake's schematic for the development board linked [here](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf). 
+The DIP switches, reset button, and LEDs with current limiting resistors are shown in Prof. Brake's schematic for the development board linked [here](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf). 
 
 As for the blinking LED (led_controller), a counter was used to delay setting the LED. The calculation is the following:
 
