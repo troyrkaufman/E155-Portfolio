@@ -39,7 +39,7 @@
     "href": "blog.html",
     "title": "E155 Blog",
     "section": "",
-    "text": "Configuring LEDs and Seven Segment Display\n\n\n\n\n\nLab 1 Report and Reflection\n\n\n\n\n\nSep 2, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 1 Reflections\n\n\n\n\n\nBuilt my development board and began to program in SystemVerilog\n\n\n\n\n\nAug 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nHello Quarto\n\n\n\n\n\nWeek 1 Update\n\n\n\n\n\nAug 27, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
+    "text": "Configuring LEDs and Seven Segment Display\n\n\n\n\n\nConfiguring a 7-segment display and LEDs\n\n\n\n\n\nSep 2, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 1 Reflections\n\n\n\n\n\nBuilt my development board and began to program in SystemVerilog\n\n\n\n\n\nAug 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nHello Quarto\n\n\n\n\n\nWeek 1 Update\n\n\n\n\n\nAug 27, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "labs/lab1/lab1.html",
@@ -58,8 +58,8 @@
   {
     "objectID": "posts/lab1.html",
     "href": "posts/lab1.html",
-    "title": "Configuring LEDs and Seven Segment Display",
+    "title": "Lab 1",
     "section": "",
-    "text": "Hi all! I recently finsihed the first lab in MicroPs, and it was overwhelmingly satisfying to see my hardwork pour into a successful project. Despite the premise being to turn on LEDs in various fashions, the lab was gruelling in some aspects. This lab was a neat introduction to the digital design world."
+    "text": "Hi all! I recently finsihed the first lab in MicroPs, and it was overwhelmingly satisfying to see my hardwork pour into a successful project. Despite the premise being to turn on LEDs in various fashions, the lab was gruelling in some aspects. This lab was a neat introduction to the digital design world.\nThe most exciting part about the lab was designing the counter needed to blink an LED at 2.4 Hz. There is a handful of ways to perform this operation, and I did end up trying some of them out to see which method would produce the closest blinking freqeuncy. It was fun trying this out. However, this ended up being one of the most frustrating parts of the lab as well. I incorrectly gave my counter 22 bits when in reality it needed 25 bits to operate. This oversight caused hours of pain and eventual embarassment aft the bug was caught.\nOverall, this was an entertaining lab that showed me the FPGA design flow in Lattice Radiant. It took sometime getting used to the new tool, howeever, I don’t doubt that with some practice I can maneuver around with no difficulty."
   }
 ]
