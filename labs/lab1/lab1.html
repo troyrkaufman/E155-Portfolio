@@ -164,11 +164,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab1_image_full.jpg" class="img-fluid figure-img"></p>
-<figcaption>Full Lab 1 Setup</figcaption>
-</figure>
+<div class="figure center">
+<p><img src="images/lab1_image_full.jpg" class="img-fluid" alt="A simple diagram"> Figure 1: This is a caption for the image.</p>
 </div>
 <section id="summary" class="level1">
 <h1>Summary</h1>
@@ -185,42 +182,63 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>System Block Diagram</figcaption>
 </figure>
 </div>
-<p>The seven segment display source code (seg_decoder) could be handled by strictly utilizing combinational logic via a case statement. The seven segment display was cathode driven so +3V3 supplied voltage to the common anode while the seven bit signals were attatched to the display via current limiting resistors. The calculation for the resistor values is as follows: ADD BELOW EQUATION AND SCHEMATIC</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab1_schematic.drawio.png" class="img-fluid figure-img"></p>
-<figcaption>System Schematic</figcaption>
-</figure>
-</div>
+<p>The seven segment display source code (seg_decoder) could be handled by strictly utilizing combinational logic via a case statement. The seven segment display was cathode driven, so, +3V3 supplied voltage to the common anode while the seven bit signals were attatched to the display via current limiting resistors. The calculation for the resistor values is as follows:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/resistor_calculations.jpg" class="img-fluid figure-img"></p>
 <figcaption>Current Limiting Resistor Calculations</figcaption>
 </figure>
 </div>
-<p>As for the blinking LED (led_controller), a counter was used to delay setting the LED. The calculation is the following: ADD BELOW CALCULATION</p>
+<p>Where Vcc is the voltage source, Vd is the voltage drop across the LED, I is the desired current, and Rn is the resistor value. Solving for Rn gave a resistance value of 60 ohms for the current limiting resistors. These components contributed to the overall schematic as seen below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab1_schematic.jpg" class="img-fluid figure-img"></p>
+<figcaption>System Schematic</figcaption>
+</figure>
+</div>
+<p>The DIP switches, reset button, and LEDs with current limiting resistors are shown in Prof.&nbsp;Brake’s schematic for the development board linked <a href="https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf">here</a>.</p>
+<p>As for the blinking LED (led_controller), a counter was used to delay setting the LED. The calculation is the following:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/counter_limit.jpg" class="img-fluid figure-img"></p>
 <figcaption>Counter Limit Calculations</figcaption>
 </figure>
 </div>
-<p>The counter limit value determines the blinking frequency. A reset signal initializes the counter and LED state to both 0. Until the counter reached the desired limit, counter increments by 1 and the LED retains its value on each clock cycle. Once the limit is hit, the counter is reset and the LED’s value is negated thus turning on/off at the desired freqeuncy.</p>
+<p>The counter limit value determines the blinking frequency with the associated clock. A reset signal initializes the counter and LED state to both 0. Until the counter reaches the desired limit, the counter increments by 1 and the LED retains its value on each clock cycle. Once the limit is achieved, the counter is reset and the LED’s value is negated thus turning the LED on/off at the desired freqeuncy.</p>
 <p>The additional goals included driving XOR and AND logic on LEDs which were produced by assign statements housed inside the LED controller source code.</p>
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
-<p>To verify the design, an oscilloscope was used to measure the blinking LED’s freqeuncy while testbenches stimulated the source code. The oscilloscope image below shows that the LED was blinking at 2.404 Hz - well within the vicinity to be considered acceptable. ADD BELOW</p>
+<p>To verify the design, an oscilloscope was used to measure the blinking LED’s freqeuncy while testbenches stimulated the source code.</p>
+<p>The oscilloscope image below shows that the LED was blinking at 2.404 Hz - well within the vicinity to be considered acceptable.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/blinking_led_freq.jpg" class="img-fluid figure-img"></p>
 <figcaption>Oscilloscope trace of a 2.4 Hz signal</figcaption>
 </figure>
 </div>
-<p>The seg_decoder module was tested by inputting all possible switch combinations (2^4). The designer would have to manually verify that the module works as intended by analyzing the XOR and AND LED signals.</p>
-<p>ADD in seg_decoder testbench image</p>
-<p>Furthermore, a testbench was created for the seg_controller which now included a custom ~48MHz clock to run the sequential logic. The Lattice HSOSC library couldn’t be accessed, so a makeshift one was created. Once again, all switch combinations were supplied to the module so that the designer could check if each hexadecimal output was correct.</p>
-<p>ADD in led_controller testbench image</p>
+<p>The seg_decoder module was tested by inputting all possible switch combinations (2^4). The designer would have to manually verify that the module worked as intended by checking if each hexadecimal output was correct for each successive input.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/seg_decoder_tb_image.jpg" class="img-fluid figure-img"></p>
+<figcaption>seg_decoder Waveform</figcaption>
+</figure>
+</div>
+<p>Furthermore, a testbench was created for the led_controller which now included a custom ~48MHz clock to run the sequential logic. The Lattice HSOSC library couldn’t be accessed, so a makeshift one was created. Once again, all switch combinations were supplied to the module so that the designer could analyze the XOR and AND logic. If one wished to observe the 2.4 Hz behavior for the third LED, they could do so if they had all day to wait.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/led_controller_tb_image.jpg" class="img-fluid figure-img"></p>
+<figcaption>led_controller Waveform</figcaption>
+</figure>
+</div>
+<p>Finally, a system testbench was made to test the two submodules together. This testbench contained the same stimulus package as the led_controller testbench had.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab1_tk_tb_image.jpg" class="img-fluid figure-img"></p>
+<figcaption>Top Module Waveform</figcaption>
+</figure>
+</div>
+<p>The verification for all submodules and top module were successful including the oscilloscope test mentioned above.</p>
 
 
 </section>
