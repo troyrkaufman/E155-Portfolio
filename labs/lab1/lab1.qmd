@@ -6,7 +6,6 @@ date: "9/3/24"
 draft: false
 ---
 
-
 ![Image of Lab 1 Setup](images/lab1_image_full.jpg)
 
 # Summary
