@@ -8,9 +8,9 @@
 
 <meta name="author" content="Troy Kaufman">
 <meta name="dcterms.date" content="2024-09-02">
-<meta name="description" content="Lab 2">
+<meta name="description" content="Time Multiplexing a Dual 7-Segment Display">
 
-<title>Time Multiplexing – E155 Portfolio</title>
+<title>Lab 2 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,20 +114,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Time Multiplexing</h1>
+<h1 class="title">Lab 2</h1>
 </div>
 
 <div>
   <div class="description">
-    Lab 2
+    Time Multiplexing a Dual 7-Segment Display
   </div>
 </div>
 
@@ -156,8 +164,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>This lab introduced students to a method of conserving valuable resources - multiplexing. In this case, students were required to time multiplex a dual 7-segment display along with illustrating the sum between the two hex numbers shown on the display.</p>
+</section>
+<section id="design" class="level1">
+<h1>Design</h1>
+</section>
+<section id="verification" class="level1">
+<h1>Verification</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/block_diagram.jpg" class="img-fluid figure-img"></p>
+<figcaption>Block Diagram</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/segment_decoder_image.PNG" class="img-fluid figure-img"></p>
+<figcaption>7-Segment Decoder Waveform</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/hex_num_controller_waveform.PNG" class="img-fluid figure-img"></p>
+<figcaption>FSM Hexadecimal Display Controller Waveform</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/led_sum_waveform.PNG" class="img-fluid figure-img"></p>
+<figcaption>Inputs Summed</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab2_tk_image_closeup.PNG" class="img-fluid figure-img"></p>
+<figcaption>Top Module Waveform</figcaption>
+</figure>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
