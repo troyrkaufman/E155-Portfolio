@@ -28,10 +28,10 @@ As mentioned before, there are four submodules in the overall design. Below is t
 
 ![Block Diagram](images/lab2_block_diagram.jpg)
 
-To properly multiplex the dual 7-segment display, two PNP transistors controlled their own common anode pins on the display. One would supply a flow of current to a number's segments while the other transistor would limit the current, thus, turning one number on and the other one off. To protect the FPGA from current damage coming from the emitter, a 330 ohm resistor was put in series with the base. This limited the FPGA to output a current of 7.8 mA, below the soft 8 mA recommended maximum output current listed in the[FPGA data sheet](https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf) on Table 4.13 pg 34. 
+To properly multiplex the dual 7-segment display, two PNP transistors controlled their own common anode pins on the display. One would supply a flow of current to a number's segments while the other transistor would limit the current, thus, turning one number on and the other one off. To protect the FPGA from current damage coming from the emitter, a 330 ohm resistor was put in series with the base. This limited the FPGA to output a current of 7.8 mA, below the soft 8 mA recommended maximum output current listed in the [FPGA data sheet](https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf) on Table 4.13 on pg 34. 
 
 The [PNP 2N3906 transistor](https://www.mouser.com/datasheet/2/308/2N3906_D-2309245.pdf) current gain for this particular 
-instance can be found pg 6, Figure 13. 
+instance can be found on pg 6 in Figure 13. 
 
 The following calculation and explanation shows why a 330 ohm resistor was used in the design. 
 ![Base Resistor Calculation for Transistors](images/lab2_transistor_calc.jpg)

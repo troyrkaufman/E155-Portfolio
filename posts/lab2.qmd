@@ -1,0 +1,15 @@
+---
+title: "Lab 2"
+description: "Time Multiplexing a Dual 7-Segment Display"
+author: "Troy Kaufman"
+date: "9/13/24"
+draft: false
+---
+
+Hello all! I just finished my second lab in microPs and I'm overly satisfied that it's completed. There was a period of time 
+where I didn't think I was going to be able to meet all requirements due to a frustrating bug that was introducing floating values
+to my design. In the end, the bug was addressed and put to rest. 
+
+The most exciting part about the project was figuring out how to properly multiplex the display. It took some time to wrap my head around the idea of time multiplexing. After figuring out how to do it, the next hardest step was learning how a PNP transistor worked. I've never had experience with BJTs before. I preferred the method of researching the component then using trial and error to find the perfect fit for my design. 
+
+As mentioned before, I encountered a very frustrating bug. Whenever a user applied a specific sequence of inputs, all voltages in every component became floating values on the development board and breadboard. Even ground was off! After many hours of trying to track down the bug, I noticed that the issue was due to the internal pull-up resistors in the FPGA development board. The default 100k ohms was too large along with the next lowest resistor value of 10k. I had to set the pull-up resistors to the minimum value that the tool allowed me to set the resistors to: 3.3k ohms. This worked wonders on my problem! As one can imagine after experiencing a frustrating bug like this, I was hyped up and jumping around with my hands in the air when the bug was fixed! Note that I did attempt to put smaller pull-up resistors on a breadboard while avoiding using the internal resistors, however, this brought floating values along with it. 
