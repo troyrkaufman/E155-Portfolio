@@ -4,6 +4,12 @@ description: "Seven Segement Display and LED logic"
 author: "Troy Kaufman"
 date: "9/3/24"
 draft: false
+about:
+    template: solana
+    links: 
+        - icon: github
+          text: Github
+          href: https://github.com/troyrkaufman/e155_lab1/tree/main/fpga/src
 ---
 
 ![Image of Lab 1 Setup](images/lab1_image_full.jpg)
@@ -18,7 +24,7 @@ Overall, this lab took 9 hours to finish which included soldering the developmen
 # Design
 The first aspect to consider in the project was separating the design approaches for the two main goals: blinking an LED and driving a seven segment display. A top module would instantiate these two designs named led_controller and seg_decoder along with providing a high speed oscillator (48 MHz) developed by Lattice Radiant as seen in the BLOCK DIAGRAM BELOW. 
 
-![System Block Diagram](images/block_diagram.jpg) 
+![System Block Diagram](images/lab1_block_diagram.png) 
 
 The seven segment display source code (seg_decoder) could be handled by strictly utilizing combinational logic via a case statement. The seven segment display was cathode driven, so, +3V3 supplied voltage to the common anode while the seven bit signals were attatched to the display via current limiting resistors. The calculation for the resistor values is as follows:
 
