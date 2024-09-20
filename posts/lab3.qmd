@@ -1,0 +1,10 @@
+---
+title: "Lab 3"
+description: "Keypad Scanning"
+author: "Troy Kaufman"
+date: "9/19/24"
+draft: false
+---
+
+First off, this was a time consuming, gruelling lab. I spent over 40 hours on the lab, and I haven't finished it. However, it's
+been a wonderful learning experience filled with 
