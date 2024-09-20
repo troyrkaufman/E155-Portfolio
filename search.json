@@ -21,18 +21,18 @@
     "text": "Reflections\nSoldering surface mounted parts provided me with a new challenge that was quite exciting and frustrating simultaneously. I enjoyed Radiant’s intuitive FPGA design flow process compared to other IDE synthesizers like Xilinx Vivado."
   },
   {
-    "objectID": "posts/lab1.html",
-    "href": "posts/lab1.html",
-    "title": "Lab 1",
+    "objectID": "posts/lab2.html",
+    "href": "posts/lab2.html",
+    "title": "Lab 2",
     "section": "",
-    "text": "Hi all! I recently finsihed the first lab in MicroPs, and it was overwhelmingly satisfying to see my hardwork pour into a successful project. Despite the premise being to turn on LEDs in various fashions, the lab was gruelling in some aspects. This lab was a neat introduction to the digital design world.\nThe most exciting part about the lab was designing the counter needed to blink an LED at 2.4 Hz. There is a handful of ways to perform this operation, and I did end up trying some of them out to see which method would produce the closest blinking freqeuncy. It was fun trying this out. However, this ended up being one of the most frustrating parts of the lab as well. I incorrectly gave my counter 22 bits when in reality it needed 25 bits to operate. This oversight caused hours of pain and eventual embarassment aft the bug was caught.\nOverall, this was an entertaining lab that showed me the FPGA design flow in Lattice Radiant. It took sometime getting used to the new tool, howeever, I don’t doubt that with some practice I can maneuver around with no difficulty."
+    "text": "Hello all! I just finished my second lab in microPs and I’m overly satisfied that it’s completed. There was a period of time where I didn’t think I was going to be able to meet all requirements due to a frustrating bug that was introducing floating values to my design. In the end, the bug was addressed and put to rest.\nThe most exciting part about the project was figuring out how to properly multiplex the display. It took some time to wrap my head around the idea of time multiplexing. After figuring out how to do it, the next hardest step was learning how a PNP transistor worked. I’ve never had experience with BJTs before. I preferred the method of researching the component then using trial and error to find the perfect fit for my design.\nAs mentioned before, I encountered a very frustrating bug. Whenever a user applied a specific sequence of inputs, all voltages in every component became floating values on the development board and breadboard. Even ground was off! After many hours of trying to track down the bug, I noticed that the issue was due to the internal pull-up resistors in the FPGA development board. The default 100k ohms was too large along with the next lowest resistor value of 10k. I had to set the pull-up resistors to the minimum value that the tool allowed me to set the resistors to: 3.3k ohms. This worked wonders on my problem! As one can imagine after experiencing a frustrating bug like this, I was hyped up and jumping around with my hands in the air when the bug was fixed! Note that I did attempt to put smaller pull-up resistors on a breadboard while avoiding using the internal resistors, however, this brought floating values along with it."
   },
   {
-    "objectID": "labs.html",
-    "href": "labs.html",
-    "title": "E155 Labs",
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "Hello Quarto",
     "section": "",
-    "text": "Lab 3\n\n\n\n\n\nScanning and Debouncing a Keypad\n\n\n\n\n\nSep 19, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nSeven Segement Display and LED logic\n\n\n\n\n\nSep 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
+    "text": "Hi everyone! My name is Troy!"
   },
   {
     "objectID": "labs/lab2/lab2.html",
@@ -53,7 +53,7 @@
     "href": "blog.html",
     "title": "E155 Blog",
     "section": "",
-    "text": "Lab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nConfiguring a 7-segment display and LEDs\n\n\n\n\n\nSep 2, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 1 Reflections\n\n\n\n\n\nBuilt my development board and began to program in SystemVerilog\n\n\n\n\n\nAug 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nHello Quarto\n\n\n\n\n\nWeek 1 Update\n\n\n\n\n\nAug 27, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
+    "text": "Lab 3\n\n\n\n\n\nKeypad Scanning\n\n\n\n\n\nSep 19, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nConfiguring a 7-segment display and LEDs\n\n\n\n\n\nSep 2, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 1 Reflections\n\n\n\n\n\nBuilt my development board and began to program in SystemVerilog\n\n\n\n\n\nAug 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nHello Quarto\n\n\n\n\n\nWeek 1 Update\n\n\n\n\n\nAug 27, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "labs/lab1/lab1.html",
@@ -63,24 +63,24 @@
     "text": "Image of Lab 1 Setup\n\n\n\nSummary\nLab 1 introduced students to the digital design world by giving them experience with FPGA design flow from creating block diagrams to synthesizing hardware on an FPGA. The main goals of this lab were to produce a 2.4 Hz blinking LED along with driving other LEDs based on XOR and AND logic. Additionally, a seven segment display would illustrate the current hexadecimal number input from the DIP switches located on the development board.\nSeveral SystemVerilog modules produced the necessary logic to perform the requirements, and circuit analysis was used to calculate component values to drive the seven segment display according to the Specs sheet.\nOverall, this lab took 9 hours to finish which included soldering the development board together and fixing ST-link/J-link issues along with the hardware design and debugging.\n\n\nDesign\nThe first aspect to consider in the project was separating the design approaches for the two main goals: blinking an LED and driving a seven segment display. A top module would instantiate these two designs named led_controller and seg_decoder along with providing a high speed oscillator (48 MHz) developed by Lattice Radiant as seen in the BLOCK DIAGRAM BELOW.\n\n\n\nSystem Block Diagram\n\n\nThe seven segment display source code (seg_decoder) could be handled by strictly utilizing combinational logic via a case statement. The seven segment display was cathode driven, so, +3V3 supplied voltage to the common anode while the seven bit signals were attatched to the display via current limiting resistors. The calculation for the resistor values is as follows:\n\n\n\nCurrent Limiting Resistor Calculations\n\n\nWhere Vcc is the voltage source, Vd is the voltage drop across the LED, I is the desired current, and Rn is the resistor value. Solving for Rn gave a resistance value of 60 ohms for the current limiting resistors. These components contributed to the overall schematic as seen below:\n\n\n\nSystem Schematic\n\n\nThe DIP switches, reset button, and LEDs with current limiting resistors are shown in Prof. Brake’s schematic for the development board linked here.\nAs for the blinking LED (led_controller), a counter was used to delay setting the LED. The calculation is the following:\n\n\n\nCounter Limit Calculations\n\n\nThe counter limit value determines the blinking frequency with the associated clock. A reset signal initializes the counter and LED state to both 0. Until the counter reaches the desired limit, the counter increments by 1 and the LED retains its value on each clock cycle. Once the limit is achieved, the counter is reset and the LED’s value is negated thus turning the LED on/off at the desired freqeuncy.\nThe additional goals included driving XOR and AND logic on LEDs which were produced by assign statements housed inside the LED controller source code.\n\n\nVerification\nTo verify the design, an oscilloscope was used to measure the blinking LED’s freqeuncy while testbenches stimulated the source code.\nThe oscilloscope image below shows that the LED was blinking at 2.404 Hz - well within the vicinity to be considered acceptable.\n\n\n\nOscilloscope trace of a 2.4 Hz signal\n\n\nThe seg_decoder module was tested by inputting all possible switch combinations (2^4). The designer would have to manually verify that the module worked as intended by checking if each hexadecimal output was correct for each successive input.\n\n\n\nseg_decoder Waveform\n\n\nFurthermore, a testbench was created for the led_controller which now included a custom ~48MHz clock to run the sequential logic. The Lattice HSOSC library couldn’t be accessed, so a makeshift one was created. Once again, all switch combinations were supplied to the module so that the designer could analyze the XOR and AND logic. If one wished to observe the 2.4 Hz behavior for the third LED, they could do so if they had all day to wait.\n\n\n\nled_controller Waveform\n\n\nFinally, a system testbench was made to test the two submodules together. This testbench contained the same stimulus package as the led_controller testbench had.\n\n\n\nTop Module Waveform\n\n\nThe verification for all submodules and top module were successful including the oscilloscope test mentioned above. All requirements were satisfied."
   },
   {
-    "objectID": "labs/lab3/lab3.html",
-    "href": "labs/lab3/lab3.html",
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nSeven Segement Display and LED logic\n\n\n\n\n\nSep 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/lab1.html",
+    "href": "posts/lab1.html",
+    "title": "Lab 1",
+    "section": "",
+    "text": "Hi all! I recently finsihed the first lab in MicroPs, and it was overwhelmingly satisfying to see my hardwork pour into a successful project. Despite the premise being to turn on LEDs in various fashions, the lab was gruelling in some aspects. This lab was a neat introduction to the digital design world.\nThe most exciting part about the lab was designing the counter needed to blink an LED at 2.4 Hz. There is a handful of ways to perform this operation, and I did end up trying some of them out to see which method would produce the closest blinking freqeuncy. It was fun trying this out. However, this ended up being one of the most frustrating parts of the lab as well. I incorrectly gave my counter 22 bits when in reality it needed 25 bits to operate. This oversight caused hours of pain and eventual embarassment aft the bug was caught.\nOverall, this was an entertaining lab that showed me the FPGA design flow in Lattice Radiant. It took sometime getting used to the new tool, howeever, I don’t doubt that with some practice I can maneuver around with no difficulty."
+  },
+  {
+    "objectID": "posts/lab3.html",
+    "href": "posts/lab3.html",
     "title": "Lab 3",
     "section": "",
-    "text": "Summary\n\n\nDesign\n    # Verification\n\n\n\nSuccessful System Simulation"
-  },
-  {
-    "objectID": "posts/first-post.html",
-    "href": "posts/first-post.html",
-    "title": "Hello Quarto",
-    "section": "",
-    "text": "Hi everyone! My name is Troy!"
-  },
-  {
-    "objectID": "posts/lab2.html",
-    "href": "posts/lab2.html",
-    "title": "Lab 2",
-    "section": "",
-    "text": "Hello all! I just finished my second lab in microPs and I’m overly satisfied that it’s completed. There was a period of time where I didn’t think I was going to be able to meet all requirements due to a frustrating bug that was introducing floating values to my design. In the end, the bug was addressed and put to rest.\nThe most exciting part about the project was figuring out how to properly multiplex the display. It took some time to wrap my head around the idea of time multiplexing. After figuring out how to do it, the next hardest step was learning how a PNP transistor worked. I’ve never had experience with BJTs before. I preferred the method of researching the component then using trial and error to find the perfect fit for my design.\nAs mentioned before, I encountered a very frustrating bug. Whenever a user applied a specific sequence of inputs, all voltages in every component became floating values on the development board and breadboard. Even ground was off! After many hours of trying to track down the bug, I noticed that the issue was due to the internal pull-up resistors in the FPGA development board. The default 100k ohms was too large along with the next lowest resistor value of 10k. I had to set the pull-up resistors to the minimum value that the tool allowed me to set the resistors to: 3.3k ohms. This worked wonders on my problem! As one can imagine after experiencing a frustrating bug like this, I was hyped up and jumping around with my hands in the air when the bug was fixed! Note that I did attempt to put smaller pull-up resistors on a breadboard while avoiding using the internal resistors, however, this brought floating values along with it."
+    "text": "First off, this was a time consuming, gruelling lab. I spent over 40 hours on the lab, and I haven’t finished it. However, it’s been a wonderful learning experience filled with"
   }
 ]
