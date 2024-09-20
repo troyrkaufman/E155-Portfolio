@@ -81,6 +81,6 @@
     "href": "posts/lab3.html",
     "title": "Lab 3",
     "section": "",
-    "text": "First off, this was a time consuming, gruelling lab. I spent over 40 hours on the lab, and I haven’t finished it. However, it’s been a wonderful learning experience filled with"
+    "text": "First off, this was a time consuming and gruelling lab. I spent over 40 hours on the lab, and I still haven’t finished it. However, it’s been a wonderful learning experience filled with “Ah-Ha” and “Oh-No” moments. This lab built off the two previous ones where counters were used in multiple places and the time multiplexing scheme was used to display the pressed keys.\nDesigning, implementing, and debugging this system was an entirely different beast. Clock domain crossing was considered, debouncing logic was needed, many submodules communicated with each other, and a complex FSM was built to scan the keypad in such a way to account for all possible human inputs and tomfoolery when it came to pressing keys on the keypad. Despite not having finished it like most others, I am proud of the work I’ve done so far, and I’m determined to finish the lab in the next couple days.\nThe digital design aspect of this course has been a great introduction to digital electronics. I’m looking forward to the next FPGA based lab in about a month or so when we create AES on an FPGA and MCU."
   }
 ]
