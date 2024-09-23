@@ -1,0 +1,25 @@
+---
+title: "Lab 3"
+description: "Scanning and Debouncing a Keypad"
+author: "Troy Kaufman"
+date: "9/19/24"
+draft: false
+about: 
+    template: solana
+    links: 
+        - icon: github
+          text: Github
+          href: https://github.com/troyrkaufman/e155_lab3/tree/main/src
+---
+
+# Summary
+
+# Design
+
+![Block Diagram](images/lab3_block_diagram.jpg)
+![Scanner FSM STD](images/lab3_std.jpg)
+![Scanner FSM S0, S3, S6, S9 Outputs](images/lab3_std_outputs.jpg)
+![Debouncer FSM](images/debouncer_fsm.jpg)
+# Verification
+
+![Successful System Simulation](images/system_simulation_3_stimuli.PNG)
