@@ -27,7 +27,7 @@ current number pressed is updated to the key that was pushed. These two two numb
 
 I created this design by first deciding that my keypad would be oriented in a pull-up resistor fashion where the row inputs would be pulled to Vcc at all times until an event occurs. I then created the scanner FSM that would rotate a LOW voltage on one column at a time while the rest were driven HIGH. Thus if a key was pressed, the current column that was set LOW would send this LOW voltage across the SPDT switch that was pushed down enabling a LOW voltage to be read on that associated row. This grounding effect overpowers the weak internal pull-up resistor on the rows allowing a valid logic level voltage to be read. The electrical schematic for the system is shown below. 
 
-![Electrical Schematic](images/lab3_schematic.jpg)
+![Electrical Schematic](images/lab3_sch.jpg)
 
 It is important to mention that the scanner FSM toggles the LOW and HIGH column voltage. When a key is pressed, all columns are driven LOW to avoid potential contention scenarios. On the otherhand when no key push is detected, all columns are toggled HIGH except for one to scan the keypad. In addition to this, the FSM sends an encoded column signal to a combinational keypad decoder module to properly decode the key press. Below is the state transition diagram for the scanner FSM.
 
