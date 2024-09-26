@@ -180,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 <p>I created this design by first deciding that my keypad would be oriented in a pull-up resistor fashion where the row inputs would be pulled to Vcc at all times until an event occurs. I then created the scanner FSM that would rotate a LOW voltage on one column at a time while the rest were driven HIGH. Thus if a key was pressed, the current column that was set LOW would send this LOW voltage across the SPDT switch that was pushed down enabling a LOW voltage to be read on that associated row. This grounding effect overpowers the weak internal pull-up resistor on the rows allowing a valid logic level voltage to be read. The electrical schematic for the system is shown below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/lab3_schematic.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/lab3_sch.jpg" class="img-fluid figure-img"></p>
 <figcaption>Electrical Schematic</figcaption>
 </figure>
 </div>
