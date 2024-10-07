@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Troy Kaufman">
+<meta name="dcterms.date" content="2024-10-03">
+<meta name="description" content="Music Playing on an MCU Bare Metal">
 
-<title>E155 Labs – E155 Portfolio</title>
+<title>Lab 4 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,21 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +80,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -149,15 +91,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./labs.html" aria-current="page"> 
+    <a class="nav-link" href="../../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
 </ul>
@@ -171,154 +113,94 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-solana column-body">
+  <div class="about-entity">
+    <div class="entity-contents">
+      <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">E155 Labs</h1>
+<h1 class="title">Lab 4</h1>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
+<div>
+  <div class="description">
+    Music Playing on an MCU Bare Metal
   </div>
-  
+</div>
+<div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Troy Kaufman </p>
+          </div>
+  </div>
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
+  </div>
+</header> <div class="about-links">
+  <a href="https://github.com/troyrkaufman/e155_lab4/tree/main/src" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+</div>
+      <div class="about-contents"><main class="content" id="quarto-document-content">
+
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Students needed to bare metal program their MCUs to play Fur Elise on an 8-ohm speaker. The purpose of this lab was to get students familiar to navigating a large datasheet for relevant information pertaining to the project at hand as well as interact with an MCU on a very low level. The lab intoduced timers which are specialized counters with extreme accuracy. Students needed to configure timers to produce the requested frequency and delay to properly produce the song. Device drivers were made from scratch too.</p>
+</section>
+<section id="design" class="level1">
+<h1>Design</h1>
+<p>Prior to this lab, I was familiar with configuring GPIO and RCC registers, however, I needed to understand how timers worked. Before I began designing anything, I researched the various timers available on the MCU. I chose timers 15 and 16 because they had output pads and contained the PWM function unlike other available timers.</p>
+<p>I focused on how to produce a PWM signal first. The reference manual for this particular STM32xxx on page 906 ambiguously stated how to configure a timer for a PWM operation. I made note of these important signals and bit flipping and went to the timer 16’s memory mapped section. Within my TIMER device driver, I created two functions whose purpose were to initialize the PWM configuration for timer 16 once and to update several configuration registers upon every clock cycle respectively. The most notable registers were the prescalar (PSC) and auto-reload (ARR) registers.</p>
+<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my freqeuncies to be within 1% of the requested freqeuncies. So I needed my input clock into the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. I calculated the PSC divisor value by using the following equation:</p>
+<p>!(Insert equation)[]</p>
+<p>The next important configuration register to consider was the ARR. This register held the value that the counter would increment towards to in order to produce the requested freqeuncy. I recognized the following relationship between the value housed in ARR and the input frequency where CK_CNT represents the 10 KHz coutner input.</p>
+<p>!(Insert equation)[]</p>
+<p>My design choices for the counter clock forces my minimum and maximum frequency calculations to be the following:</p>
+<pre><code>Calculation for minimum frequency supported:
+    This is calculated by first considering the the counter's input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536, we can find the value for when the MCU will output its lowest freqeuncy given the configurations:</code></pre>
+<p>!()[]</p>
+<pre><code>Calculation for maximum freqeuncy supported:
+    This is calculated very similarly to the minimum frequency calculation. However, not the amount of times the counter has clicked will no longer be the counter's maximum value but rather its minimum value - 1:</code></pre>
+<p>!()[]</p>
+<p>Now we will cover how I implemented a delay function for a given duration. It is a similar process to how I implemented the PWM mode for timer 16. This time around I used timer 15, and put the timer in its upcounting mode to strictly increment. Most of the same registers used for implementing the PWM signal were used for the delay function with an exception for a handful that were used for comparison registers. I created initialization and update fucntions for the delay where the former would only ever update those registers once while the update function would consistently refresh the values in severl registers. The major difference between the PWM and delay functions was that there was a while loop with the delay update function checking for when a flag would be set when the duration limit had been satisfied. At that point, the while loop would end and the flag would be reset for the next delay then the next line would run.</p>
+<p>The PSC calculation for the delay register is the same as the one in the PWM register to avoid becoming an asynchronous design too much.</p>
+<p>The ARR calculation is different because we are no longer receiving an input frequency but rather a duration. To build this equation, I had to consider how fast the tick in the counter would increment. With a 10 KHz input counter clock, the counter would tick every 100 us. So, the duration was multiplied by 10 to get the the duration in terms of ms. Then a value of one was subtracted from this to get the following ARR equation:</p>
+<p>!()[]</p>
+<p>My design choices for the counter clock forces my minimum and maximum duration calculations to be the following:</p>
+<pre><code>Calculation for minimum duration supported:
+    This is the reciprocol of the input counter clock, 10 KHz.</code></pre>
+<p>!()[]</p>
+<pre><code>Calculation for maximum duration supported:
+    The maximum duration is calculated by dividing the maximum number of ticks in the 16 bit counter by the input clock frequency entering the counter:</code></pre>
+<p>!()[]</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts.</p>
+<p>These are calculations that show that the individual pitches are accurate to within 1%:</p>
 
 
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1727938800000" data-listing-file-modified-sort="1728312985441" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="972">
-<div class="thumbnail">
-<p><a href="./labs/lab4/lab4.html" class="no-external"></a></p><a href="./labs/lab4/lab4.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab4\images\psc.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab4/lab4.html" class="no-external"></a></p>
+</section>
+</main></div>
+    </div>
+  </div>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab4/lab4.html" class="no-external">Lab 4</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab4/lab4.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab4/lab4.html" class="no-external">Bare Metal Programming on an MCU to Produce Music</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab4/lab4.html" class="no-external">
-<div class="listing-date">
-Oct 3, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1726729200000" data-listing-file-modified-sort="1727387266193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1415">
-<div class="thumbnail">
-<p><a href="./labs/lab3/lab3.html" class="no-external"></a></p><a href="./labs/lab3/lab3.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab3\images\lab3_pic.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab3/lab3.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab3/lab3.html" class="no-external">Lab 3</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab3/lab3.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab3/lab3.html" class="no-external">Scanning and Debouncing a Keypad</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab3/lab3.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1726210800000" data-listing-file-modified-sort="1726156041166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="861">
-<div class="thumbnail">
-<p><a href="./labs/lab2/lab2.html" class="no-external"></a></p><a href="./labs/lab2/lab2.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab2\images\lab2_setup.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab2/lab2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab2/lab2.html" class="no-external">Lab 2</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab2/lab2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab2/lab2.html" class="no-external">Time Multiplexing a Dual 7-Segment Display</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab2/lab2.html" class="no-external">
-<div class="listing-date">
-Sep 13, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1725346800000" data-listing-file-modified-sort="1726151918747" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="654">
-<div class="thumbnail">
-<p><a href="./labs/lab1/lab1.html" class="no-external"></a></p><a href="./labs/lab1/lab1.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab1\images\lab1_image_full.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab1/lab1.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab1/lab1.html" class="no-external">Lab 1</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab1/lab1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab1/lab1.html" class="no-external">Seven Segement Display and LED logic</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab1/lab1.html" class="no-external">
-<div class="listing-date">
-Sep 3, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -339,13 +221,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -411,7 +286,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/troyrkaufman\.github\.io\/E155-Portfolio\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

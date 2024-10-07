@@ -8,7 +8,7 @@
 
 <meta name="author" content="Troy Kaufman">
 <meta name="dcterms.date" content="2024-10-03">
-<meta name="description" content="Music Playing on an MCU Bare Metal">
+<meta name="description" content="Bare Metal Programming on an MCU to Produce Music">
 
 <title>Lab 4 – E155 Portfolio</title>
 <style>
@@ -119,8 +119,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#to-be-completed-later" id="toc-to-be-completed-later" class="nav-link" data-scroll-target="#to-be-completed-later">TO BE COMPLETED LATER</a></li>
+  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
   </ul>
 </nav>
     </div>
@@ -134,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div>
   <div class="description">
-    Music Playing on an MCU Bare Metal
+    Bare Metal Programming on an MCU to Produce Music
   </div>
 </div>
 <div class="quarto-title-meta">
@@ -167,39 +166,70 @@ ul.task-list li input[type="checkbox"] {
 <h1>Design</h1>
 <p>Prior to this lab, I was familiar with configuring GPIO and RCC registers, however, I needed to understand how timers worked. Before I began designing anything, I researched the various timers available on the MCU. I chose timers 15 and 16 because they had output pads and contained the PWM function unlike other available timers.</p>
 <p>I focused on how to produce a PWM signal first. The reference manual for this particular STM32xxx on page 906 ambiguously stated how to configure a timer for a PWM operation. I made note of these important signals and bit flipping and went to the timer 16’s memory mapped section. Within my TIMER device driver, I created two functions whose purpose were to initialize the PWM configuration for timer 16 once and to update several configuration registers upon every clock cycle respectively. The most notable registers were the prescalar (PSC) and auto-reload (ARR) registers.</p>
-<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my freqeuncies to be within 1% of the requested freqeuncies. So I needed my input clock into the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. I calculated the PSC divisor value by using the following equation:</p>
-<p>!(Insert equation)[]</p>
+<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my freqeuncies to be within 1% of the requested freqeuncies. So I needed my input clock to the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. The relatively low 10 KHz clock speed provided good resolution. I calculated the PSC divisor value by using the following equation:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/psc.jpg" class="img-fluid figure-img"></p>
+<figcaption>Prescalar Divisor Equation</figcaption>
+</figure>
+</div>
 <p>The next important configuration register to consider was the ARR. This register held the value that the counter would increment towards to in order to produce the requested freqeuncy. I recognized the following relationship between the value housed in ARR and the input frequency where CK_CNT represents the 10 KHz coutner input.</p>
-<p>!(Insert equation)[]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/arr_pwm.jpg" class="img-fluid figure-img"></p>
+<figcaption>ARR PWM Calculation</figcaption>
+</figure>
+</div>
 <p>My design choices for the counter clock forces my minimum and maximum frequency calculations to be the following:</p>
 <pre><code>Calculation for minimum frequency supported:
     This is calculated by first considering the the counter's input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536, we can find the value for when the MCU will output its lowest freqeuncy given the configurations:</code></pre>
-<p>!()[]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/min_freq.jpg" class="img-fluid figure-img"></p>
+<figcaption>Minimum Freqeuncy Supported</figcaption>
+</figure>
+</div>
 <pre><code>Calculation for maximum freqeuncy supported:
     This is calculated very similarly to the minimum frequency calculation. However, not the amount of times the counter has clicked will no longer be the counter's maximum value but rather its minimum value - 1:</code></pre>
-<p>!()[]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/max_freq.jpg" class="img-fluid figure-img"></p>
+<figcaption>Maximum Frequency Supported</figcaption>
+</figure>
+</div>
 <p>Now we will cover how I implemented a delay function for a given duration. It is a similar process to how I implemented the PWM mode for timer 16. This time around I used timer 15, and put the timer in its upcounting mode to strictly increment. Most of the same registers used for implementing the PWM signal were used for the delay function with an exception for a handful that were used for comparison registers. I created initialization and update fucntions for the delay where the former would only ever update those registers once while the update function would consistently refresh the values in severl registers. The major difference between the PWM and delay functions was that there was a while loop with the delay update function checking for when a flag would be set when the duration limit had been satisfied. At that point, the while loop would end and the flag would be reset for the next delay then the next line would run.</p>
 <p>The PSC calculation for the delay register is the same as the one in the PWM register to avoid becoming an asynchronous design too much.</p>
-<p>The ARR calculation is different because we are no longer receiving an input frequency but rather a duration. To build this equation, I had to consider how fast the tick in the counter would increment. With a 10 KHz input counter clock, the counter would tick every 100 us. So, the duration was multiplied by 10 to get the the duration in terms of ms. Then a value of one was subtracted from this to get the following ARR equation:</p>
-<p>!()[]</p>
+<p>The ARR calculation is different because we are no longer receiving an input frequency but rather a duration. To build this equation, I had to consider how fast the tick in the counter would increment in upcounting mode (page 893 in the reference manual). With a 10 KHz input counter clock, the counter would tick every 100 us. So, the duration was multiplied by 10 to get the the duration in terms of ms. Then a value of one was subtracted from this to get the following ARR equation:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/arr_delay.jpg" class="img-fluid figure-img"></p>
+<figcaption>ARR Delay Calculation</figcaption>
+</figure>
+</div>
 <p>My design choices for the counter clock forces my minimum and maximum duration calculations to be the following:</p>
 <pre><code>Calculation for minimum duration supported:
     This is the reciprocol of the input counter clock, 10 KHz.</code></pre>
-<p>!()[]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/min_duration.jpg" class="img-fluid figure-img"></p>
+<figcaption>Minimum Duration Calculation</figcaption>
+</figure>
+</div>
 <pre><code>Calculation for maximum duration supported:
     The maximum duration is calculated by dividing the maximum number of ticks in the 16 bit counter by the input clock frequency entering the counter:</code></pre>
-<p>!()[]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/max_delay.jpg" class="img-fluid figure-img"></p>
+<figcaption>Maximum Duration Calculation</figcaption>
+</figure>
+</div>
 </section>
-<section id="results" class="level1">
-<h1>Results</h1>
-<p>The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts.</p>
-<p>This is a link to my </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/yFY1lExnWCY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div> that plays Fur Elise.<p></p>
-<p>This is a link to my Happy Birthday song </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Cy9B9i0Aetk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>.<p></p>
-<p>These are calculations that show that the individual pitches are accurate to within 1%:</p>
-</section>
-<section id="to-be-completed-later" class="level1">
-<h1>TO BE COMPLETED LATER</h1>
-<p>Frequency (Hz) Measured Frequency (Hz) 220 233.1 246.9 261.6 277.2 293.7 311.1 329.6 349.2 370.0 392.0 415.3 440 466.2 493.9 523.3 554.4 587.3 622.2 659.2 698.4 740.9 784.0 830.6 880</p>
+<section id="verification" class="level1">
+<h1>Verification</h1>
+<p>The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts. I spent about 15 hours on this lab.</p>
+<p>This is a link to my </p><div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/yFY1lExnWCY" width="250" height="175" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div> that plays Fur Elise.<p></p>
+<p>This is a link to my Happy Birthday song </p><div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/Cy9B9i0Aetk" width="250" height="175" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>.<p></p>
+<p>These are calculations that show that the individual pitches are accurate to within 1%. The measured values seen in the images are captured from an oscilloscope.</p>
 
 
 </section>
