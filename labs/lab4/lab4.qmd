@@ -32,13 +32,13 @@ The next important configuration register to consider was the ARR. This register
 
 My design choices for the counter clock forces my minimum and maximum frequency calculations to be the following:
 
-    Calculation for minimum frequency supported:
-        This is calculated by first considering the the counter's input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536, we can find the value for when the MCU will output its lowest freqeuncy given the configurations:
+Calculation for minimum frequency supported:
+This is calculated by first considering the the counter's input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536, we can find the value for when the MCU will output its lowest freqeuncy given the configurations:
 
 ![Minimum Freqeuncy Supported](images/min_freq.jpg)
 
-    Calculation for maximum freqeuncy supported:
-        This is calculated very similarly to the minimum frequency calculation. However, not the amount of times the counter has clicked will no longer be the counter's maximum value but rather its minimum value - 1:
+Calculation for maximum freqeuncy supported:
+This is calculated very similarly to the minimum frequency calculation. However, not the amount of times the counter has clicked will no longer be the counter's maximum value but rather its minimum value - 1:
 
 ![Maximum Frequency Supported](images/max_freq.jpg)
 
@@ -52,13 +52,13 @@ The ARR calculation is different because we are no longer receiving an input fre
 
 My design choices for the counter clock forces my minimum and maximum duration calculations to be the following:
 
-    Calculation for minimum duration supported:
-        This is the reciprocol of the input counter clock, 10 KHz.
+Calculation for minimum duration supported:
+This is the reciprocol of the input counter clock, 10 KHz.
 
 ![Minimum Duration Calculation](images/min_duration.jpg)
 
-    Calculation for maximum duration supported:
-        The maximum duration is calculated by dividing the maximum number of ticks in the 16 bit counter by the input clock frequency entering the counter:
+Calculation for maximum duration supported:
+The maximum duration is calculated by dividing the maximum number of ticks in the 16 bit counter by the input clock frequency entering the counter:
 
 ![Maximum Duration Calculation](images/max_delay.jpg)
 
@@ -66,11 +66,14 @@ My design choices for the counter clock forces my minimum and maximum duration c
 
 The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts. I spent about 15 hours on this lab. 
 
-This is a link to my {{< video https://youtu.be/yFY1lExnWCY width="250" height="175" >}} that plays Fur Elise. 
+This is a video of my design playing Fur Elise with volume manipulation form a potentiometer. {{< video https://youtu.be/yFY1lExnWCY >}} 
 
-This is a link to my Happy Birthday song {{< video https://youtu.be/Cy9B9i0Aetk width="250" height="175" >}}. 
+This is a video that displays my Happy Birthday song. {{< video https://youtu.be/Cy9B9i0Aetk >}}
 
-These are calculations that show that the individual pitches are accurate to within 1%. The measured values seen in the images are captured from an oscilloscope.
+Below are calculations that show the individual pitches are accurate to within 1% of the requested freqeuncy. The measured values seen in the images are captured from an oscilloscope.
 
+![](images/fre1_calc.jpg)
+![Percent Error Calculations](images/freq2_calc.jpg)
 
+This was a very fun lab, and I can't wait to play more songs!
 
