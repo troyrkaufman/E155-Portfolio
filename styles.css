@@ -1,3 +1,36 @@
 /* css styles */
 
   
+/* For smaller screens like mobile */
+@media only screen and (max-width: 600px) {
+    body {
+      font-size: 16px; /* Adjust font size for readability */
+    }
+    
+    .container {
+      padding: 10px;
+    }
+  }
+  
+  /* For medium screens like tablets */
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    body {
+      font-size: 18px;
+    }
+  
+    .container {
+      padding: 20px;
+    }
+  }
+  
+  /* For larger screens like desktops */
+  @media only screen and (min-width: 1025px) {
+    body {
+      font-size: 20px;
+    }
+    
+    .container {
+      padding: 30px;
+    }
+  }
+  

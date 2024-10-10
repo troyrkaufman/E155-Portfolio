@@ -1,0 +1,72 @@
+---
+title: "Lab 5"
+description: "Using Interrupts to Detect a Motor's Velocity"
+author: "Troy Kaufman"
+date: "10/10/24"
+draft: false
+about: 
+    template: solana
+    links: 
+        - icon: github
+          text: Github
+          href: https://github.com/troyrkaufman/e155_lab5/tree/main/src
+---
+
+![Quadrature Encoder](images/quadrature_encoder.jpg)
+
+# Summary
+This was another bare metal programming MCU lab where students were required to configure interrupts on quadrature encoder pulses to calculate both direction and rev/s. A quadrature encoder is a device that can measure direction and speed of an object by producing two out of phase signals. It works by detecting changes in the state of these signals as the object moves, allowing for precise tracking of rotational motion. During my testing, I encountered weird motor behavior where the outputs from the two signals in the encoder produced inconsistent waveforms which was reflected in my rev/s calculations. This lab took around 15 hours and meets proficiency. 
+
+# Design
+The first thing to do was to understand what a quadrature encoder was. It is essentially an a spinning disk with two fixed sensors detecting a change in state of the disk. In our case, hall effect sensors are doing this with magnets while other encoder might use IR methods. These sensors are placed 90 degrees apart from one another effectively making one signal always "lead" or lag behind the other as seen in the Lab 5 [manual](https://hmc-e155.github.io/lab/lab5/). 
+
+PA5, the input pin receiving the A signal, was not 5V tolerant. A voltage divider was used to divide the 4.6V input voltage down to 2.5V. The PA6 pin was 5V tolerant so the B signal was directly linked to that pin without a voltage divider. 
+
+![Electrical Schematic](images/schematic.jpg)
+
+## Motor's Direction
+
+I calculated direction by using this "leading" and "lagging" behavior. I placed an interrupt on signal A's output. When the interrupt triggered, the program would look at the current B signal output. If B was LOW, then the motor's direction was CCW and CW if B was HIGH. 
+
+Initializing the interrupt took a number of steps:
+
+1. Enabling SYSCFG in RCC to set up the clock domain
+2. Configuring the EXTICR register to make input encoder signals A and B hold contain interrupts
+3. Enabling interrupts globally
+4. Masks bits corresponding to the MCU pins used
+5. Enable rising edge interrupt trigger in RTSR corresponding to the MCU pin used
+6. Disabling the falling edge interrutp trigger in FTSr corresponing to the MCU pin used
+7. Turn on the EXTI interrupt found in NVIC_ISER (Position Table corresponds to bit manipulated)
+8. Creating the IRQHandler corresponding to the EXTI interrupt used in the NVIC_ISER
+
+
+## Motor's Speed
+To calculate the motor's speed, I used the change in time between two interrupts method. When the program would catch an interrupt triggered on A, the counter would be reset and start counting afterwards. When interrupt B was triggered some time later, the program would retrieve the incremented value and use it in a calculation for speed. This particular encoder contains 120 pulses per revolution (PPR) which will be used in the calculation shown below:
+
+![Speed Calculations](images/IMG_0246.jpg)
+
+## Debugging
+The main challenge I faced in this lab was once again a logic level issue. The voltage output on the A and B pins was sketchy and inconsistent among the motors in the lab. I didn't realize until after many debugging hours that my HIGH logic was stepping into the forbidden zone causing interrupts to fire back to back even when there was no valid rising edge. This failure to recognize the problem led to my calculations saying that the motor was rotating consistently at 10 m/s in alternating directions every half second or so when at least one volt was applied to the motor. 
+
+The motor could not drive enough current with the resistors I was using in my voltage divider. So I increased my resistor values. This resulted in better and more consistent calculations.
+
+# Verification
+
+The design works, however, I am concerned with the encoder's reliability. As seen below in the oscilloscope trace, the periods for both pulses are relatively consistent but there are times when there is a longer than normal period. 
+
+![Oscilloscope trace with cursors measuring normal delta_time](images/DS1Z_QuickPrint6.png)
+
+![Oscilloscope trace with cursors measuring abnormal delta_time](images/DS1Z_QuickPrint5.png)
+
+This is reflected in my calculations with a 12V input where the motor rev/s should be around 10 rev/s, however, the abnormal period encountered results in a vastly different rev/s calculation: 
+
+![Calculation output on PC](images/more_consistent_shows_gaps.jpg)
+
+As mentioned before, I think this is due to a faulty encoder. In the past, I've also the noticed that the duty cycles for the two incoming A and B signals are very inconsistent when viewing it on an oscilloscope. I tried using another motor/encoder and I got the same result with a less severe abnormal period. Perhaps the motor I used was faulty. 
+
+
+
+
+
+
+
