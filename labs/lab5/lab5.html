@@ -185,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="motors-direction" class="level2">
 <h2 data-anchor-id="motors-direction">Motor’s Direction</h2>
-<p>I calculated direction by using this “leading” and “lagging” behavior. I placed an interrupt on signal A’s output. When the interrupt triggered, the program would look at the current B signal output. If B was HIGH, then the motor’s direction was CCW and CW if B was LOW.</p>
+<p>I calculated direction by using this “leading” and “lagging” behavior. I placed an interrupt on signal A’s output. When the interrupt triggered, the program would look at the current B signal output. If B was LOW, then the motor’s direction was CCW and CW if B was HIGH.</p>
 <p>Initializing the interrupt took a number of steps:</p>
 <ol type="1">
 <li>Enabling SYSCFG in RCC to set up the clock domain</li>
