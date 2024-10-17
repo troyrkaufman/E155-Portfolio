@@ -121,6 +121,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
   <ul class="collapse">
   <li><a href="#motors-direction" id="toc-motors-direction" class="nav-link" data-scroll-target="#motors-direction">Motor’s Direction</a></li>
+  <li><a href="#interrupt-flowchart" id="toc-interrupt-flowchart" class="nav-link" data-scroll-target="#interrupt-flowchart">Interrupt Flowchart</a></li>
   <li><a href="#motors-speed" id="toc-motors-speed" class="nav-link" data-scroll-target="#motors-speed">Motor’s Speed</a></li>
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
   <li><a href="#interrupting-vs-polling" id="toc-interrupting-vs-polling" class="nav-link" data-scroll-target="#interrupting-vs-polling">Interrupting vs Polling</a></li>
@@ -199,6 +200,15 @@ ul.task-list li input[type="checkbox"] {
 <li>Creating the IRQHandler corresponding to the EXTI interrupt used in the NVIC_ISER</li>
 </ol>
 </section>
+<section id="interrupt-flowchart" class="level2">
+<h2 data-anchor-id="interrupt-flowchart">Interrupt Flowchart</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/interrupt_flowchart.jpg" class="img-fluid figure-img"></p>
+<figcaption>Interrupt Flowchart</figcaption>
+</figure>
+</div>
+</section>
 <section id="motors-speed" class="level2">
 <h2 data-anchor-id="motors-speed">Motor’s Speed</h2>
 <p>To calculate the motor’s speed, I used the change in time between the two pulses’ rising and falling edges. This change in time would then be plugged into a speed equation.</p>
@@ -222,7 +232,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
-<p>![Image of motor and the 90 degree offset digital signals]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/motor.jpg" class="img-fluid figure-img"></p>
+<figcaption>Image of motor and the 90 degree offset digital signals</figcaption>
+</figure>
+</div>
 <p>The design works as intended and achieves the excellence mark. I used a working encoder this itme around and I got consistent results. A positive and negative 12V input to the motor should make the motor spin at positive and negative 10 rev/s respectively as seen below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

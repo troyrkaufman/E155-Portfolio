@@ -105,6 +105,13 @@
     "text": "Motor’s Direction\nI calculated direction by using this “leading” and “lagging” behavior. I placed an interrupt on signal A’s output. When the interrupt triggered, the program would look at the current B signal output. If B was LOW, then the motor’s direction was CCW and CW if B was HIGH.\nInitializing the interrupt took a number of steps:\n\nEnabling SYSCFG in RCC to set up the clock domain\nConfiguring the EXTICR register to make input encoder signals A and B hold contain interrupts\nEnabling interrupts globally\nMasks bits corresponding to the MCU pins used\nEnable rising edge interrupt trigger in RTSR corresponding to the MCU pin used\nDisabling the falling edge interrutp trigger in FTSr corresponing to the MCU pin used\nTurn on the EXTI interrupt found in NVIC_ISER (Position Table corresponds to bit manipulated)\nCreating the IRQHandler corresponding to the EXTI interrupt used in the NVIC_ISER"
   },
   {
+    "objectID": "labs/lab5/lab5.html#interrupt-flowchart",
+    "href": "labs/lab5/lab5.html#interrupt-flowchart",
+    "title": "Lab 5",
+    "section": "Interrupt Flowchart",
+    "text": "Interrupt Flowchart\n\n\n\nInterrupt Flowchart"
+  },
+  {
     "objectID": "labs/lab5/lab5.html#motors-speed",
     "href": "labs/lab5/lab5.html#motors-speed",
     "title": "Lab 5",
