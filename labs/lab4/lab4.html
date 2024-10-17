@@ -172,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>I focused on how to produce a PWM signal first. The reference manual for this particular STM32xxx on page 906 ambiguously stated how to configure a timer for a PWM operation. I made note of these important signals and bit flipping. I traveled to the timer 16’s memory mapped section. Within my TIMER device driver, I created two functions whose purpose were to initialize the PWM configuration for timer 16 once and to update several configuration registers upon every clock cycle respectively. The most notable registers were the prescalar (PSC) and auto-reload (ARR) registers.</p>
-<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my freqeuncies to be within 1% of the requested freqeuncies. So I put my input clock to the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. The relatively low 10 KHz clock speed provided good resolution. I calculated the PSC divisor value by using the following equation:</p>
+<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my frequencies to be within 1% of the requested freqeuncies. So I put my input clock to the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. The relatively low 10 KHz clock speed provided good resolution. I calculated the PSC divisor value by using the following equation:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/psc.jpg" class="img-fluid figure-img"></p>
@@ -229,8 +229,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="verification" class="level1">
 <h1>Verification</h1>
 <p>The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts. I spent about 15 hours on this lab.</p>
-<p>This is a video of my design playing Fur Elise with volume manipulation from a potentiometer. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/yFY1lExnWCY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>This is a video that displays my Happy Birthday song. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Cy9B9i0Aetk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>This is a video of my design playing Fur Elise with volume manipulation from a potentiometer. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/wKw-QXuSS9Q" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>This is a video that displays my Happy Birthday song. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vhRR3orCcNg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Below are calculations that show the individual pitches are accurate to within 1% of the requested freqeuncy. The measured values seen in the images are captured from an oscilloscope.</p>
 <p><img src="images/fre1_calc.jpg" class="img-fluid"> <img src="images/freq2_calc.jpg" class="img-fluid" alt="Percent Error Calculations"></p>
 <p>This was a very fun lab, and I can’t wait to play more songs!</p>

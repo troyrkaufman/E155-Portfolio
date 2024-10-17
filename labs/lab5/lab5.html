@@ -123,6 +123,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#motors-direction" id="toc-motors-direction" class="nav-link" data-scroll-target="#motors-direction">Motor’s Direction</a></li>
   <li><a href="#motors-speed" id="toc-motors-speed" class="nav-link" data-scroll-target="#motors-speed">Motor’s Speed</a></li>
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  <li><a href="#interrupting-vs-polling" id="toc-interrupting-vs-polling" class="nav-link" data-scroll-target="#interrupting-vs-polling">Interrupting vs Polling</a></li>
   </ul></li>
   <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
   </ul>
@@ -179,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 <p>PA5, the input pin receiving the A signal, was not 5V tolerant. A voltage divider was used to divide the 4.6V input voltage down to 2.5V. The PA6 pin was 5V tolerant so the B signal was directly linked to that pin without a voltage divider.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/schematic.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/updated_schematic (1).jpg" class="img-fluid figure-img"></p>
 <figcaption>Electrical Schematic</figcaption>
 </figure>
 </div>
@@ -200,10 +201,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="motors-speed" class="level2">
 <h2 data-anchor-id="motors-speed">Motor’s Speed</h2>
-<p>To calculate the motor’s speed, I used the change in time between two interrupts method. When the program would catch an interrupt triggered on A, the counter would be reset and start counting afterwards. When interrupt B was triggered some time later, the program would retrieve the incremented value and use it in a calculation for speed. This particular encoder contains 120 pulses per revolution (PPR) which will be used in the calculation shown below:</p>
+<p>To calculate the motor’s speed, I used the change in time between the two pulses’ rising and falling edges. This change in time would then be plugged into a speed equation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/IMG_0246.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/updated_calculation.jpg" class="img-fluid figure-img"></p>
 <figcaption>Speed Calculations</figcaption>
 </figure>
 </div>
@@ -212,31 +213,32 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="debugging">Debugging</h2>
 <p>The main challenge I faced in this lab was once again a logic level issue. The voltage output on the A and B pins was sketchy and inconsistent among the motors in the lab. I didn’t realize until after many debugging hours that my HIGH logic was stepping into the forbidden zone causing interrupts to fire back to back even when there was no valid rising edge. This failure to recognize the problem led to my calculations saying that the motor was rotating consistently at 10 m/s in alternating directions every half second or so when at least one volt was applied to the motor.</p>
 <p>The motor could not drive enough current with the resistors I was using in my voltage divider. So I increased my resistor values. This resulted in better and more consistent calculations.</p>
+<p>Another bug I encountered was a race condition for calcualting delta_time within the interrupt handler. My mistake was using the still running timer 16 multiple times within the handler. This meant that the counter value would update as code was being executed, thus, slowing the speed calculations down dramaticaly. Setting the counter value once in the beginning of the handler was a relatively simple solution to this problem.</p>
+</section>
+<section id="interrupting-vs-polling" class="level2">
+<h2 data-anchor-id="interrupting-vs-polling">Interrupting vs Polling</h2>
+<p>Another popular technique to detect hardware and software events is polling. For example, one could use a while loop with an if condition checking if a signal has reached a rising edge event. However, polling can take a significant amount of time to detect events because the frequency of polling might be slower than the input signal. An interrupt has an almost immediate response to real time events. An interrupt also allows the CPU to run other parts of the program without constantly having to poll for an event. In conclusion, interrupts are faster at detecting events than polling.</p>
 </section>
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
-<p>The design works, however, I am concerned with the encoder’s reliability. As seen below in the oscilloscope trace, the periods for both pulses are relatively consistent but there are times when there is a longer than normal period.</p>
+<p>![Image of motor and the 90 degree offset digital signals]</p>
+<p>The design works as intended and achieves the excellence mark. I used a working encoder this itme around and I got consistent results. A positive and negative 12V input to the motor should make the motor spin at positive and negative 10 rev/s respectively as seen below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/DS1Z_QuickPrint6.png" class="img-fluid figure-img"></p>
-<figcaption>Oscilloscope trace with cursors measuring normal delta_time</figcaption>
+<p><img src="images/4_CW_more accurate.jpg" class="img-fluid figure-img"></p>
+<figcaption>+12V input to motor</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/DS1Z_QuickPrint5.png" class="img-fluid figure-img"></p>
-<figcaption>Oscilloscope trace with cursors measuring abnormal delta_time</figcaption>
+<p><img src="images/4_more_consistent.jpg" class="img-fluid figure-img"></p>
+<figcaption>-12V input to the motor</figcaption>
 </figure>
 </div>
-<p>This is reflected in my calculations with a 12V input where the motor rev/s should be around 10 rev/s, however, the abnormal period encountered results in a vastly different rev/s calculation:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/more_consistent_shows_gaps.jpg" class="img-fluid figure-img"></p>
-<figcaption>Calculation output on PC</figcaption>
-</figure>
-</div>
-<p>As mentioned before, I think this is due to a faulty encoder. In the past, I’ve also the noticed that the duty cycles for the two incoming A and B signals are very inconsistent when viewing it on an oscilloscope. I tried using another motor/encoder and I got the same result with a less severe abnormal period. Perhaps the motor I used was faulty.</p>
+<p>The design also works for low speeds too. Below is a video showing this.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/DZ_GLWa5V0Q" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>This lab took me about 15 hours to comlpete and it was incredibly satisfying to get it to work!</p>
 
 
 </section>
