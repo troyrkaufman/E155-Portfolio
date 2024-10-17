@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Prior to this lab, I was familiar with configuring GPIO and RCC registers, however, I needed to understand how timers worked. Before I began designing anything, I researched the various timers available on the MCU. I chose timers 15 and 16 because they had output pads and contained the PWM function unlike other available timers. The harware components this lab were relatively simple to setup:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/schematic.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/updated schematic.jpg" class="img-fluid figure-img"></p>
 <figcaption>Design’s Electrical Schematic</figcaption>
 </figure>
 </div>
@@ -190,14 +190,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Calculation for minimum frequency supported: This is calculated by first considering the the counter’s input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536 ticks, we can find the value for when the MCU will output its lowest freqeuncy:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/min_freq.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/updated_calc.jpg" class="img-fluid figure-img"></p>
 <figcaption>Minimum Freqeuncy Supported</figcaption>
 </figure>
 </div>
 <p>Calculation for maximum freqeuncy supported: This is calculated very similarly to the minimum frequency calculation. However, the amount of times the counter has clicked will no longer be the counter’s maximum value but rather its minimum value - 1:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/max_freq.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/updated_calc - Copy.jpg" class="img-fluid figure-img"></p>
 <figcaption>Maximum Frequency Supported</figcaption>
 </figure>
 </div>
@@ -232,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This is a video of my design playing Fur Elise with volume manipulation from a potentiometer. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/wKw-QXuSS9Q" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>This is a video that displays my Happy Birthday song. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vhRR3orCcNg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Below are calculations that show the individual pitches are accurate to within 1% of the requested freqeuncy. The measured values seen in the images are captured from an oscilloscope.</p>
-<p><img src="images/fre1_calc.jpg" class="img-fluid"> <img src="images/freq2_calc.jpg" class="img-fluid" alt="Percent Error Calculations"></p>
+<p><img src="images/updated_freq1.jpg.jpg" class="img-fluid"> <img src="images/updated_freq2.jpg" class="img-fluid" alt="Percent Error Calculations"></p>
 <p>This was a very fun lab, and I can’t wait to play more songs!</p>
 
 
