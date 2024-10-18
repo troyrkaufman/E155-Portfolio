@@ -1,5 +1,5 @@
 ---
-title: "Lab 3"
+title: "Reflection 3"
 description: "Keypad Scanning"
 author: "Troy Kaufman"
 date: "9/19/24"

@@ -1,5 +1,5 @@
 ---
-title: "Lab 1"
+title: "Reflection 1"
 description: "Configuring a 7-segment display and LEDs"
 author: "Troy Kaufman"
 date: "9/2/24"

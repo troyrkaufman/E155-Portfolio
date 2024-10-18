@@ -1,5 +1,5 @@
 ---
-title: "Lab 4"
+title: "Reflection 4"
 description: "Music Playing MCU Bare Metal"
 author: "Troy Kaufman"
 date: "10/3/24"

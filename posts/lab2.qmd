@@ -1,5 +1,5 @@
 ---
-title: "Lab 2"
+title: "Reflection 2"
 description: "Time Multiplexing a Dual 7-Segment Display"
 author: "Troy Kaufman"
 date: "9/13/24"

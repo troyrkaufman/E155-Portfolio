@@ -1,0 +1,14 @@
+---
+title: "Reflection 7"
+description: "Image Processing Accelerator Ideation and Lab 6"
+author: "Troy Kaufman"
+date: "10/17/24"
+draft: false
+---
+
+I had my project proposal checkoff earlier today and it went really well! All my research and effort into organizing the system paid off. Throughout this research period, I learned a lot about Direct Memory Access (DMA) and its purposes. It's necessary to use this feature in a microcontroller when the designer needs the CPU to be handling tasks continuously without frequent disruptions from managing data traffic. 
+
+It seems like the project is on the right path for now. I'll be researching DMA in-depth next week about the relevant registers and bits that need to be manipulated for the two DMA channels that I'll be using. The grayscale implementation should be rather easy to put in as it requires some byte management and a trivial calculation. 
+
+I'll be starting lab 6 this week which should help me with understanding how to configure the SPI protocol on the STM32. This lab will also give me the chance to use a hardware logic analyzer. I've used Xilinx Vivado's logic analyzer in the past, but it was tedious to setup and wasn't all to helpful. This upcoming week should be fun!
+
