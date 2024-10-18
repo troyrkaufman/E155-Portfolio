@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Troy Kaufman">
-<meta name="dcterms.date" content="2024-09-19">
-<meta name="description" content="Keypad Scanning">
+<meta name="dcterms.date" content="2024-10-17">
+<meta name="description" content="Image Processing Accelerator Ideation and Lab 6">
 
-<title>Reflection 3 – E155 Portfolio</title>
+<title>Reflection 7 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,12 +122,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reflection 3</h1>
+<h1 class="title">Reflection 7</h1>
 </div>
 
 <div>
   <div class="description">
-    Keypad Scanning
+    Image Processing Accelerator Ideation and Lab 6
   </div>
 </div>
 
@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 19, 2024</p>
+      <p class="date">October 17, 2024</p>
     </div>
   </div>
   
@@ -156,7 +156,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>First off, this was a time consuming and gruelling lab. I spent over 40 hours on the lab, and I still haven’t finished it. However, it’s been a wonderful learning experience filled with “Ah-Ha” and “Oh-No” moments. This lab built off the two previous ones where counters were used in multiple places and the time multiplexing scheme was used to display the pressed keys. Designing, implementing, and debugging this system was an entirely different beast. Clock domain crossing was considered, debouncing logic was needed, many submodules communicated with each other, and a complex FSM was built to scan the keypad in such a way to account for all possible human inputs and tomfoolery when it came to pressing keys on the keypad. Despite not having finished it like most others, I am proud of the work I’ve done so far, and I’m determined to finish the lab in the next couple days. The digital design aspect of this course has been a great introduction to digital electronics. I’m looking forward to the next FPGA based lab in about a month or so when we create AES on an FPGA and MCU.</p>
+<p>I had my project proposal checkoff earlier today and it went really well! All my research and effort into organizing the system paid off. Throughout this research period, I learned a lot about Direct Memory Access (DMA) and its purposes. It’s necessary to use this feature in a microcontroller when the designer needs the CPU to be handling tasks continuously without frequent disruptions from managing data traffic.</p>
+<p>It seems like the project is on the right path for now. I’ll be researching DMA in-depth next week about the relevant registers and bits that need to be manipulated for the two DMA channels that I’ll be using. The grayscale implementation should be rather easy to put in as it requires some byte management and a trivial calculation.</p>
+<p>I’ll be starting lab 6 this week which should help me with understanding how to configure the SPI protocol on the STM32. This lab will also give me the chance to use a hardware logic analyzer. I’ve used Xilinx Vivado’s logic analyzer in the past, but it was tedious to setup and wasn’t all to helpful. This upcoming week should be fun!</p>
 
 
 
