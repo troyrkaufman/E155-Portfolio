@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Troy Kaufman">
+<meta name="dcterms.date" content="2024-10-23">
+<meta name="description" content="Reading temperature sensor data over SPI">
 
-<title>E155 Blog – E155 Portfolio</title>
+<title>Lab 6 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,21 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +80,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -149,15 +91,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./labs.html"> 
+    <a class="nav-link" href="../../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
 </ul>
@@ -171,294 +113,110 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
+  <ul class="collapse">
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#spi-formatting" id="toc-spi-formatting" class="nav-link" data-scroll-target="#spi-formatting">SPI Formatting</a></li>
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  </ul></li>
+  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-solana column-body">
+  <div class="about-entity">
+    <div class="entity-contents">
+      <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">E155 Blog</h1>
+<h1 class="title">Lab 6</h1>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
+<div>
+  <div class="description">
+    Reading temperature sensor data over SPI
   </div>
-  
+</div>
+<div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Troy Kaufman </p>
+          </div>
+  </div>
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 23, 2024</p>
+    </div>
+  </div>
+  </div>
+</header> <div class="about-links">
+  <a href="https://github.com/troyrkaufman/e155_lab6/tree/main" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+</div>
+      <div class="about-contents"><main class="content" id="quarto-document-content">
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/DS1Z_QuickPrint9.png" class="img-fluid figure-img"></p>
+<figcaption>Logic Analyzer Trace Showing a Room Temperature of 23.5 C</figcaption>
+</figure>
+</div>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Communication is an important part of any design that requires two or more devices to interact with one another. In this lab, students were exposed to the serial peripheral interface (SPI) communication protocol. The SPI faciliated communication between the STM MCU and temperature sensor. Users interfacing with a webpage hosted on a network created by an ESP8266 WIFI SoC solution could choose up to 5 different temperature resolutions: 8-bit, 9-bit, 10-bit, 11-bit, and 12-bit. Some HTML code was written to setup the configurations on the webpage. Students became very familiar with logic analyzers especially on the SPI setting to debug their systems.</p>
+</section>
+<section id="design" class="level1">
+<h1>Design</h1>
+<section id="approach" class="level2">
+<h2 data-anchor-id="approach">Approach</h2>
+<p>My approach to the design involved becoming comfortable with the SPI peripherals on the STM MCU. I tracked the relevelant configuration registers and bits within them to properly configure SPI. I used the _VAL2FLD HAL to initialize these bits in initSPI(). Another important function, spiSendReceive(), took in a byte input that would be placed in the data register (DR) within SPI. This proved challenging at first because the DR was 16 bits long but the SPI system was running at 8 bits. The following manipulation was done:</p>
+<ol type="1">
+<li>Captured the DR’s address in memory</li>
+<li>Casted the 16-bit value in DR as a volatile 8-bit integer pointer</li>
+<li>Dereferenced this value</li>
+<li>Finally let this complicated manipulation receive the byte of data</li>
+</ol>
+<p>Additionally, this function retrieved the data stored in the DR only when data was available.</p>
+<p>Next I created a file that would configure the temperature sensor settings (writeRes()) and another function that would read the 2s complement formatted input temperature (readTemp()) and convert it to the proper value.</p>
+<p>When the user requests a temperature resolution, that data gets sent to the MCU where writeRes() would parse the information and correctly configure the temperature sensor’s output setting accordingly. The sensor would then send an updated temperature value to the MCU where readTemp() would parse the two bytes of information. The first byte is shifted to left 8 times and the second byte would be concatenated to this value creating a 16 bit integer. Depending on the specific resolution requested, the data would then be shifted to the right where the actual LSB of the data would be in the 0th place of the 16 bit integer. Once again according to the resolution selected, the data would then be multiplied by a specific value less than zero to get the data to contain decimal places. With a simple float cast to these outputs and some additional logic to handle negative 2s complement numbers, data can be correctly read from the sensor.</p>
+<p>To display the temperature on the monitor, html code was written to allow users to interact with buttons on screen to choose up to 5 different temperature resolutions. The network setup, USART, and most of the html was provided with the lab.</p>
+</section>
+<section id="spi-formatting" class="level2">
+<h2 data-anchor-id="spi-formatting">SPI Formatting</h2>
+<p>The entire data transfer process consists of 6 bytes where the first two bytes will always configure the temperature sensor while the latter four bytes would initiate a read access in certain sensor registers and eventually receive the data.</p>
+<p>The first byte is initiaiting a write transaction to the sensor by sending 0x80 - the address of the configuration register within temperature sensor’s memory map. The second byte is the actual data that is being transfered to the configuration register. This byte will contain the necessary information to setup the requested temperature resolution in the sensor’s temperature calculations.</p>
+<p>The third byte, 0x02, is requesting to read the MSByte of the temperature data. Just like with writing data, we cannot read/write data on the same transfer. So, the fourth byte sends a dummy byte to sensor so that SPI clock cycles get sent. As a result, the MCU receives the MSByte of temperature data. The fifth and sixth bytes work in the same fashion as the third and fourth, however, the third byte would request the LSByte of temperature data.</p>
+</section>
+<section id="debugging" class="level2">
+<h2 data-anchor-id="debugging">Debugging</h2>
+<p>The common bugs that I encountered during this lab included sending data packets in a non-recognizable format by the sensor and reading data back to the MCU without writing a dummy byte back to the sensor to initiate the data trasnfer. MY most frustrating bug took me around 5 hours to debug because a simple assumption: my wiring was correct. It turned out that I accidentally switched the SDI and SDO ports. On the logic analyzer, this looked like I was able to write valid data, but my readings would always be floating gibberish. I won’t make that mistake again.</p>
+</section>
+</section>
+<section id="verification" class="level1">
+<h1>Verification</h1>
+<p>To verify my design before testing it with the monitor, I used a logic analyzer attatched to the oscilloscopes in the digital lab. I calibrated the machine then I setup the SPI configuration on the logic analyzer which made analyzing the protocol very handy. I also used a math function on the oscilloscope to decode the data packets in hexadecimal format.</p>
+<p>My 8-bit resolution temperature reading looks like the image below: <img src="images/DS1Z_QuickPrint8.png" class="img-fluid" alt="8-bit Resolution Temperature"></p>
+<p>My 12-bit resolution temperature reading looks like the image below: <img src="images/DS1Z_QuickPrint11.png" class="img-fluid" alt="12-bit Resolution Temperature"></p>
+<p>As once could see, the first byte of data transmits a write command to the sensor followed by a certain data value to configure the resolution. The third byte receives nothing but the fourth (dummy) byte obtains the MSByte of temperature data. The 8-bit resolution stops there, but the 12-bit resolution continues to read temperature data by sending another read request for the LSByte of data. The sixth byte captures this data.</p>
+<p>A video of the design in action:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/YG38dHCMLCw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>This was a satisyfying lab to finish. In total, this took me around 20 hours to complete no thanks to the wiring bug that kept me dreaming about it for a handful of nights.</p>
 
 
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1729148400000" data-listing-file-modified-sort="1729231603630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
-<div class="thumbnail">
-<p><a href="./posts/reflection7.html" class="no-external"></a></p><a href="./posts/reflection7.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection7.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection7.html" class="no-external">Reflection 7</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection7.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection7.html" class="no-external">Image Processing Accelerator Ideation and Lab 6</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection7.html" class="no-external">
-<div class="listing-date">
-Oct 17, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1728889200000" data-listing-file-modified-sort="1729785624632" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="329">
-<div class="thumbnail">
-<p><a href="./posts/reflection6.html" class="no-external"></a></p><a href="./posts/reflection6.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection6.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection6.html" class="no-external">Reflection 6</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection6.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection6.html" class="no-external">Labs 4/5 going into fall break</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection6.html" class="no-external">
-<div class="listing-date">
-Oct 14, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1728284400000" data-listing-file-modified-sort="1728372536340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="391">
-<div class="thumbnail">
-<p><a href="./posts/reflection5.html" class="no-external"></a></p><a href="./posts/reflection5.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection5.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection5.html" class="no-external">Reflection 5</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection5.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection5.html" class="no-external">General Thoughts About The Course Thus Far</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection5.html" class="no-external">
-<div class="listing-date">
-Oct 7, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1727938800000" data-listing-file-modified-sort="1729223005126" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="264">
-<div class="thumbnail">
-<p><a href="./posts/lab4.html" class="no-external"></a></p><a href="./posts/lab4.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab4.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab4.html" class="no-external">Reflection 4</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab4.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab4.html" class="no-external">Music Playing MCU Bare Metal</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab4.html" class="no-external">
-<div class="listing-date">
-Oct 3, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1726729200000" data-listing-file-modified-sort="1729223011924" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="189">
-<div class="thumbnail">
-<p><a href="./posts/lab3.html" class="no-external"></a></p><a href="./posts/lab3.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab3.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab3.html" class="no-external">Reflection 3</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab3.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab3.html" class="no-external">Keypad Scanning</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab3.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1726210800000" data-listing-file-modified-sort="1729223018287" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="301">
-<div class="thumbnail">
-<p><a href="./posts/lab2.html" class="no-external"></a></p><a href="./posts/lab2.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab2.html" class="no-external">Reflection 2</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab2.html" class="no-external">Time Multiplexing a Dual 7-Segment Display</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab2.html" class="no-external">
-<div class="listing-date">
-Sep 13, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1725260400000" data-listing-file-modified-sort="1729223026051" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="193">
-<div class="thumbnail">
-<p><a href="./posts/lab1.html" class="no-external"></a></p><a href="./posts/lab1.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab1.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab1.html" class="no-external">Reflection 1</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab1.html" class="no-external">Configuring a 7-segment display and LEDs</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab1.html" class="no-external">
-<div class="listing-date">
-Sep 2, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="reflection,labreport" data-listing-date-sort="1725001200000" data-listing-file-modified-sort="1725068386672" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
-<div class="thumbnail">
-<p><a href="./posts/week1_reflections.html" class="no-external"></a></p><a href="./posts/week1_reflections.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week1_reflections.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week1_reflections.html" class="no-external">Week 1 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week1_reflections.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week1_reflections.html" class="no-external">Built my development board and began to program in SystemVerilog</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week1_reflections.html" class="no-external">
-<div class="listing-date">
-Aug 30, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725392516990" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
-<div class="thumbnail">
-<p><a href="./posts/first-post.html" class="no-external"></a></p><a href="./posts/first-post.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/first-post.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/first-post.html" class="no-external">Hello Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/first-post.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/first-post.html" class="no-external">Week 1 Update</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/first-post.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</section>
+</main></div>
+    </div>
+  </div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -479,13 +237,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
