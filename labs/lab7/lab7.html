@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Troy Kaufman">
-<meta name="dcterms.date" content="2024-10-03">
-<meta name="description" content="Bare Metal Programming on an MCU to Produce Music">
+<meta name="dcterms.date" content="2024-10-30">
+<meta name="description" content="Implementing AES 128-bit Encryption in Hardware">
 
-<title>Lab 4 – E155 Portfolio</title>
+<title>Lab 7 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
   <ul>
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
+  <ul class="collapse">
+  <li><a href="#addroundkey" id="toc-addroundkey" class="nav-link" data-scroll-target="#addroundkey">AddRoundKey</a></li>
+  <li><a href="#subbytes" id="toc-subbytes" class="nav-link" data-scroll-target="#subbytes">SubBytes</a></li>
+  <li><a href="#shiftrows" id="toc-shiftrows" class="nav-link" data-scroll-target="#shiftrows">ShiftRows</a></li>
+  <li><a href="#mixcolumns" id="toc-mixcolumns" class="nav-link" data-scroll-target="#mixcolumns">MixColumns</a></li>
+  <li><a href="#keyexpansion" id="toc-keyexpansion" class="nav-link" data-scroll-target="#keyexpansion">KeyExpansion</a></li>
+  </ul></li>
   <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
   </ul>
 </nav>
@@ -129,11 +136,11 @@ ul.task-list li input[type="checkbox"] {
     <div class="entity-contents">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 4</h1>
+<h1 class="title">Lab 7</h1>
 </div>
 <div>
   <div class="description">
-    Bare Metal Programming on an MCU to Produce Music
+    Implementing AES 128-bit Encryption in Hardware
   </div>
 </div>
 <div class="quarto-title-meta">
@@ -146,12 +153,12 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 3, 2024</p>
+      <p class="date">October 30, 2024</p>
     </div>
   </div>
   </div>
 </header> <div class="about-links">
-  <a href="https://github.com/troyrkaufman/e155_lab4/tree/main/src" class="about-link" rel="" target="">
+  <a href="https://github.com/troyrkaufman/e155_lab7/tree/main" class="about-link" rel="" target="">
     <i class="bi bi-github"></i>
      <span class="about-link-text">Github</span>
   </a>
@@ -160,80 +167,69 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="summary" class="level1">
 <h1>Summary</h1>
-<p>Students needed to bare metal program their MCUs to play Fur Elise on an 8-ohm speaker. The purpose of this lab was to get students familiar with navigating a large datasheet for relevant information pertaining to the project at hand as well as interact with an MCU on a very low level. The lab intoduced timers which are specialized counters with extreme accuracy. Students needed to configure timers to produce the requested frequency and delay to properly produce the song. Device drivers were made from scratch too.</p>
+<p>The Advanced Encryption Standard (AES) is a FIPS-approved cryptographic algorithm that can be used to protect electronic data. The systematic block encrypts data in this design while a testbench compares the ciphertext output to the 128-bit value. The algorithm manipulates plaintext inputs by a combination of adding, substituting, multiplying, and shifting rows/columns many times over to make the data unintelligble to outsiders. My design adheres to the 128-bit AES spec, and passes both the algorithm and SPI testbenches. This <a href="https://legacy.cryptool.org/en/cto/aes-animation">link</a> displays a great visual representation of the algorithim. The lab took me around 20 hours to get it working in simulation.</p>
 </section>
 <section id="design" class="level1">
 <h1>Design</h1>
-<p>Prior to this lab, I was familiar with configuring GPIO and RCC registers, however, I needed to understand how timers worked. Before I began designing anything, I researched the various timers available on the MCU. I chose timers 15 and 16 because they had output pads and contained the PWM function unlike other available timers. The harware components this lab were relatively simple to setup:</p>
+<p>The AES algorithm first begins with adding a key to the plaintext input into the system. This is done within the first <em>AddRoundKey</em> located at the top of the diagram shown below. The manipulated data further gets changed by entering <em>SubBytes</em>, <em>ShiftRows</em>, <em>MixColumns</em>, and finally <em>AddRoundKey</em> again. After this round of four transformations has been completed, the data will be recycled through the same four data manipulations for a total of 9 rounds. Once this has been completed, the data will be changed even more by entering <em>SubBytes</em>, <em>ShiftRows</em>, and <em>AddRoundKey</em>. The output is our cyphertext! Note that the key provided will only be used in the initial <em>AddRoundKey</em> block. The rest of the keys being added to the manipulated data within <em>AddRoundKey</em> will be constantly updated from previous keys in a recursive fashion.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/updated schematic.jpg" class="img-fluid figure-img"></p>
-<figcaption>Design’s Electrical Schematic</figcaption>
+<p><img src="images/process_aes.jpg" class="img-fluid figure-img"></p>
+<figcaption>General Layout for AES Algorithm</figcaption>
 </figure>
 </div>
-<p>I focused on how to produce a PWM signal first. The reference manual for this particular STM32xxx on page 906 ambiguously stated how to configure a timer for a PWM operation. I made note of these important signals and bit flipping. I traveled to the timer 16’s memory mapped section. Within my TIMER device driver, I created two functions whose purpose were to initialize the PWM configuration for timer 16 once and to update several configuration registers upon every clock cycle respectively. The most notable registers were the prescalar (PSC) and auto-reload (ARR) registers.</p>
-<p>The PSC acted as a clock divider to either improve or decrease resolution according to the designer’s request. In this project I needed my frequencies to be within 1% of the requested freqeuncies. So I put my input clock to the counter to be 10 KHz wheras the input clock to the timer was 1 MHz. The relatively low 10 KHz clock speed provided good resolution. I calculated the PSC divisor value by using the following equation:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/psc.jpg" class="img-fluid figure-img"></p>
-<figcaption>Prescalar Divisor Equation</figcaption>
-</figure>
-</div>
-<p>The next important configuration register to consider was the ARR. This register held the value that the counter would increment towards to in order to produce the requested freqeuncy. I recognized the following relationship between the value housed in ARR and the input frequency where CK_CNT represents the 10 KHz counter input and CK_PSC is the 1 MHz signal.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/arr_pwm.jpg" class="img-fluid figure-img"></p>
-<figcaption>ARR PWM Calculation</figcaption>
-</figure>
-</div>
-<p>My design choices for the counter clock forces my minimum and maximum frequency calculations to be the following:</p>
-<p>Calculation for minimum frequency supported: This is calculated by first considering the the counter’s input clock frequency (10 KHz) and bit width of the counter (16 bits as discussed in the manual on page 887). By assuming that the counter will reach 65536 ticks, we can find the value for when the MCU will output its lowest freqeuncy:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/updated_calc.jpg" class="img-fluid figure-img"></p>
-<figcaption>Minimum Freqeuncy Supported</figcaption>
-</figure>
-</div>
-<p>Calculation for maximum freqeuncy supported: This is calculated very similarly to the minimum frequency calculation. However, the amount of times the counter has clicked will no longer be the counter’s maximum value but rather its minimum value - 1:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/updated_calc - Copy.jpg" class="img-fluid figure-img"></p>
-<figcaption>Maximum Frequency Supported</figcaption>
-</figure>
-</div>
-<p>Now we will cover how I implemented a delay function for a given duration. It is a similar process to how I implemented the PWM mode for timer 16. I used timer 15, and put the timer in its upcounting mode to strictly increment. Most of the same registers used for implementing the PWM signal were used for the delay function with an exception for a handful that were used for comparison registers. I created initialization and update functions for the delay where the former would only ever update those registers once while the update function would consistently refresh the values in several registers. The major difference between the PWM and delay functions was that there was a while loop with the delay update function checking for when a flag would be set when the duration limit had been satisfied. At that point, the while loop would end and the flag would be reset for the next delay then the next line would run.</p>
-<p>The PSC calculation for the delay register is the same as the one in the PWM register.</p>
-<p>The ARR calculation is different because we are no longer receiving an input frequency but rather a duration. To build this equation, I had to consider how fast the tick in the counter would increment in upcounting mode (page 893 in the reference manual). With a 10 KHz input counter clock, the counter would tick every 100 us. So, the duration was multiplied by 10 to get the the duration in terms of ms. Then a value of one was subtracted from this to get the following ARR equation:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/arr_delay.jpg" class="img-fluid figure-img"></p>
-<figcaption>ARR Delay Calculation</figcaption>
-</figure>
-</div>
-<p>My design choices for the counter clock forced my minimum and maximum duration calculations to be the following:</p>
-<p>Calculation for minimum duration supported: This is the reciprocal of the input counter clock, 10 KHz.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/min_duration.jpg" class="img-fluid figure-img"></p>
-<figcaption>Minimum Duration Calculation</figcaption>
-</figure>
-</div>
-<p>Calculation for maximum duration supported: The maximum duration is calculated by dividing the maximum number of ticks in the 16 bit counter by the input clock frequency entering the counter:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/max_delay.jpg" class="img-fluid figure-img"></p>
-<figcaption>Maximum Duration Calculation</figcaption>
-</figure>
-</div>
+<p>Below is the block diagram for the system which resembles a single-cycle processor’s layout including the controller and datapath. <img src="images/block_diagram.jpg" class="img-fluid" alt="Block Diagram"></p>
+<section id="addroundkey" class="level2">
+<h2 data-anchor-id="addroundkey">AddRoundKey</h2>
+<p>The <code>add_round_key</code> module adds the input state to the current round key coming from <em>key_expansion</em> via an XOR operation. The only exception to this is in the beginning of the algorithm where the input state, plaintext, is added to an unmodified key.</p>
+</section>
+<section id="subbytes" class="level2">
+<h2 data-anchor-id="subbytes">SubBytes</h2>
+<p>The <code>sub_byte</code> module substitutes a predefined value for a specific input according to the NSA’s documentation. Each byte possibilty has a unique substitution value.</p>
+</section>
+<section id="shiftrows" class="level2">
+<h2 data-anchor-id="shiftrows">ShiftRows</h2>
+<p>The <code>shift_rows</code> module shifts each row a different amount of times for an entire state. The first row is not shifted. The second row is one byte over while the third row is shifted by two bytes. Finally, the third row is shifted over by three bytes. The output is now different from the word input. The design’s output is now different from the input</p>
+</section>
+<section id="mixcolumns" class="level2">
+<h2 data-anchor-id="mixcolumns">MixColumns</h2>
+<p>The <code>mixcolumns</code> module makes use of Galois field operations on bytes in a column. A strange sequence of multiplication and XOR operations take place according to the 128-bit standards.</p>
+</section>
+<section id="keyexpansion" class="level2">
+<h2 data-anchor-id="keyexpansion">KeyExpansion</h2>
+<p>The <code>key_expansion</code> module creates a new round key for every round in the algorithm. According to the AES standards, the previous key is taken as the input where its rows are shifted to the left by one byte thanks to <code>rot_word</code>. Then <code>sub_byte</code> is performed on the key. Further XOR operations and parsing are performed on the new round key.</p>
+</section>
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
-<p>The design works perfectly. The only quirk about it is that it takes about 4 seconds for the system to start performing the song after the program starts. I spent about 15 hours on this lab.</p>
-<p>This is a video of my design playing Fur Elise with volume manipulation from a potentiometer. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/wKw-QXuSS9Q" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>This is a video that displays my Happy Birthday song. </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vhRR3orCcNg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>Below are calculations that show the individual pitches are accurate to within 1% of the requested freqeuncy. The measured values seen in the images are captured from an oscilloscope.</p>
-<p><img src="images/updated_freq1.jpg" class="img-fluid"> <img src="images/updated_freq2.jpg" class="img-fluid" alt="Percent Error Calculations"></p>
-<p>This was a very fun lab, and I can’t wait to play more songs!</p>
+<p>This design was tested by using provided testbenches for the <code>aes_core</code> and <code>aes</code> modules while custom testbenches were made to test the submodules. The waveform traces below are from these two top level modules.</p>
+<p>The cyphertext’s trace is colored pink. The expected value matches the system’s output.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_test2.PNG" class="img-fluid figure-img"></p>
+<figcaption>Successful AES Core Waveform</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/successful_text_pic1.PNG" class="img-fluid figure-img"></p>
+<figcaption>Successful Prompt</figcaption>
+</figure>
+</div>
+<p>The AES in collaboration with SPI testbench works as well. The created created cyphertext output is clicked on the waveform below. Once can see that it matches the expected value.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_spi_waveform.PNG" class="img-fluid figure-img"></p>
+<figcaption>Successful AES SPI Waveform</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/spi_test_lab7_works_text.PNG" class="img-fluid figure-img"></p>
+<figcaption>Successful Prompt</figcaption>
+</figure>
+</div>
+<p>This lab took me around 20 hours to complete and it meets the proficiency standard.</p>
 
 
 </section>
