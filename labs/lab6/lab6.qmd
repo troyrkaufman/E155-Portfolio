@@ -1,0 +1,67 @@
+---
+title: "Lab 6"
+description: "Reading temperature sensor data over SPI"
+author: "Troy Kaufman"
+date: "10/23/24"
+draft: false
+about: 
+    template: solana
+    links: 
+        - icon: github
+          text: Github
+          href: https://github.com/troyrkaufman/e155_lab6/tree/main
+---
+
+![Logic Analyzer Trace Showing a Room Temperature of 23.5 C](images/DS1Z_QuickPrint9.png)
+
+# Summary
+Communication is an important part of any design that requires two or more devices to interact with one another. In this lab, students were exposed to the serial peripheral interface (SPI) communication protocol. The SPI faciliated communication between the STM MCU and temperature sensor. Users interfacing with a webpage hosted on a network created by an ESP8266 WIFI SoC solution could choose up to 5 different temperature resolutions: 8-bit, 9-bit, 10-bit, 11-bit, and 12-bit. Some HTML code was written to setup the configurations on the webpage. Students became very familiar with logic analyzers especially on the SPI setting to debug their systems. 
+
+# Design
+
+## Approach
+My approach to the design involved becoming comfortable with the SPI peripherals on the STM MCU. I tracked the relevelant configuration registers and bits within them to properly configure SPI. I used the _VAL2FLD HAL to initialize these bits in initSPI(). Another important function, spiSendReceive(), took in a byte input that would be placed in the data register (DR) within SPI. This proved challenging at first because the DR was 16 bits long but the SPI system was running at 8 bits. The following manipulation was done: 
+
+1. Captured the DR's address in memory
+2. Casted the 16-bit value in DR as a volatile 8-bit integer pointer
+3. Dereferenced this value
+4. Finally let this complicated manipulation receive the byte of data
+
+Additionally, this function retrieved the data stored in the DR only when data was available. 
+
+Next I created a file that would configure the temperature sensor settings (writeRes()) and another function that would read the 2s complement formatted input temperature (readTemp()) and convert it to the proper value. 
+
+When the user requests a temperature resolution, that data gets sent to the MCU where writeRes() would parse the information and correctly configure the temperature sensor's output setting accordingly. The sensor would then send an updated temperature value to the MCU where readTemp() would parse the two bytes of information. The first byte is  shifted to left 8 times and the second byte would be concatenated to this value creating a 16 bit integer. Depending on the specific resolution requested, the data would then be shifted to the right where the actual LSB of the data would be in the 0th place of the 16 bit integer. Once again according to the resolution selected, the data would then be multiplied by a specific value less than zero to get the data to contain decimal places. With a simple float cast to these outputs and some additional logic to handle negative 2s complement numbers, data can be correctly read from the sensor.
+
+To display the temperature on the monitor, html code was written to allow users to interact with buttons on screen to choose up to 5 different temperature resolutions. The network setup, USART, and most of the html was provided with the lab. 
+
+Here is the system setup: 
+![Electrical Schematic](images/IMG_0258.jpg)
+
+## SPI Formatting
+
+The entire data transfer process consists of 6 bytes where the first two bytes will always configure the temperature sensor while the latter four bytes would initiate a read access in certain sensor registers and eventually receive the data. 
+
+The first byte is initiaiting a write transaction to the sensor by sending 0x80 - the address of the configuration register within temperature sensor's memory map. The second byte is the actual data that is being transfered to the configuration register. This byte will contain the necessary information to setup the requested temperature resolution in the sensor's temperature calculations. 
+
+The third byte, 0x02, is requesting to read the MSByte of the temperature data. Just like with writing data, we cannot read/write data on the same transfer. So, the fourth byte sends a dummy byte to sensor so that SPI clock cycles get sent. As a result, the MCU receives the MSByte of temperature data. The fifth and sixth bytes work in the same fashion as the third and fourth, however, the third byte would request the LSByte of temperature data.
+
+## Debugging
+The common bugs that I encountered during this lab included sending data packets in a non-recognizable format by the sensor and reading data back to the MCU without writing a dummy byte back to the sensor to initiate the data trasnfer. MY most frustrating bug took me around 5 hours to debug because a simple assumption: my wiring was correct. It turned out that I accidentally switched the SDI and SDO ports. On the logic analyzer, this looked like I was able to write valid data, but my readings would always be floating gibberish. I won't make that mistake again. 
+
+# Verification
+To verify my design before testing it with the monitor, I used a logic analyzer attatched to the oscilloscopes in the digital lab. I calibrated the machine then I setup the SPI configuration on the logic analyzer which made analyzing the protocol very handy. I also used a math function on the oscilloscope to decode the data packets in hexadecimal format. 
+
+My 8-bit resolution temperature reading looks like the image below: 
+![8-bit Resolution Temperature](images/DS1Z_QuickPrint8.png)
+
+My 12-bit resolution temperature reading looks like the image below: 
+![12-bit Resolution Temperature](images/DS1Z_QuickPrint11.png)
+
+As once could see, the first byte of data transmits a write command to the sensor followed by a certain data value to configure the resolution. The third byte receives nothing but the fourth (dummy) byte obtains the MSByte of temperature data. The 8-bit resolution stops there, but the 12-bit resolution continues to read temperature data by sending another read request for the LSByte of data. The sixth byte captures this data. 
+
+A video of the design in action: 
+{{< video https://youtu.be/YG38dHCMLCw >}} 
+
+This was a satisyfying lab to finish. In total, this took me around 20 hours to complete no thanks to the wiring bug that kept me dreaming about it for a handful of nights. 
+

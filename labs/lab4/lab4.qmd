@@ -74,7 +74,7 @@ This is a video that displays my Happy Birthday song. {{< video https://youtu.be
 
 Below are calculations that show the individual pitches are accurate to within 1% of the requested freqeuncy. The measured values seen in the images are captured from an oscilloscope.
 
-![](images/updated_freq1.jpg.jpg)
+![ ](images/updated_freq1.jpg)
 ![Percent Error Calculations](images/updated_freq2.jpg)
 
 This was a very fun lab, and I can't wait to play more songs!

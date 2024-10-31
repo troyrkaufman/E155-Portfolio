@@ -1,0 +1,57 @@
+---
+title: "Lab 7"
+description: "Implementing AES 128-bit Encryption in Hardware"
+author: "Troy Kaufman"
+date: "10/30/24"
+draft: false
+about: 
+    template: solana
+    links: 
+        - icon: github
+          text: Github
+          href: https://github.com/troyrkaufman/e155_lab7/tree/main
+---
+
+# Summary
+The Advanced Encryption Standard (AES) is a FIPS-approved cryptographic algorithm that can be used to protect electronic data. The systematic block encrypts data in this design while a testbench compares the ciphertext output to the 128-bit value. The algorithm manipulates plaintext inputs by a combination of adding, substituting, multiplying, and shifting rows/columns many times over to make the data unintelligble to outsiders. My design adheres to the 128-bit AES spec, and passes both the algorithm and SPI testbenches. This [link](https://legacy.cryptool.org/en/cto/aes-animation) displays a great visual representation of the algorithim. The lab took me around 20 hours to get it working in simulation.
+
+# Design
+The AES algorithm first begins with adding a key to the plaintext input into the system. This is done within the first *AddRoundKey* located at the top of the diagram shown below. The manipulated data further gets changed by entering *SubBytes*, *ShiftRows*, *MixColumns*, and finally *AddRoundKey* again. After this round of four transformations has been completed, the data will be recycled through the same four data manipulations for a total of 9 rounds. Once this has been completed, the data will be changed even more by entering *SubBytes*, *ShiftRows*, and *AddRoundKey*. The output is our cyphertext! Note that the key provided will only be used in the initial *AddRoundKey* block. The rest of the keys being added to the manipulated data within *AddRoundKey* will be constantly updated from previous keys in a recursive fashion.
+
+![General Layout for AES Algorithm](images/process_aes.jpg)
+
+Below is the block diagram for the system which resembles a single-cycle processor's layout including the controller and datapath. 
+![Block Diagram](images/block_diagram.jpg)
+
+## AddRoundKey
+The `add_round_key` module adds the input state to the current round key coming from *key_expansion* via an XOR operation. The only exception to this is in the beginning of the algorithm where the input state, plaintext, is added to an unmodified key. 
+
+## SubBytes
+The `sub_byte` module substitutes a predefined value for a specific input according to the NSA's documentation. Each byte possibilty has a unique substitution value. 
+
+## ShiftRows
+The `shift_rows` module shifts each row a different amount of times for an entire state. The first row is not shifted. The second row is one byte over while the third row is shifted by two bytes. Finally, the third row is shifted over by three bytes. The output is now different from the word input. The design's output is now different from the input
+
+## MixColumns
+The `mixcolumns` module makes use of Galois field operations on bytes in a column. A strange sequence of multiplication and XOR operations take place according to the 128-bit standards. 
+
+## KeyExpansion
+The `key_expansion` module creates a new round key for every round in the algorithm. According to the AES standards, the previous key is taken as the input where its rows are shifted to the left by one byte thanks to `rot_word`. Then `sub_byte` is performed on the key. Further XOR operations and parsing are performed on the new round key. 
+
+# Verification
+This design was tested by using provided testbenches for the `aes_core` and `aes` modules while custom testbenches were made to test the submodules. The waveform traces below are from these two top level modules. 
+
+The cyphertext's trace is colored pink. The expected value matches the system's output. 
+
+![Successful AES Core Waveform](images/lab7_test2.PNG)
+
+![Successful Prompt](images/successful_text_pic1.PNG)
+
+The AES in collaboration with SPI testbench works as well. The created created cyphertext output is clicked on the waveform below. Once can see that it matches the expected value. 
+
+![Successful AES SPI Waveform](images/lab7_spi_waveform.PNG)
+
+![Successful Prompt](images/spi_test_lab7_works_text.PNG)
+
+This lab took me around 20 hours to complete and it meets the proficiency standard.
+
