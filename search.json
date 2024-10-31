@@ -91,6 +91,13 @@
     "text": "KeyExpansion\nThe key_expansion module creates a new round key for every round in the algorithm. According to the AES standards, the previous key is taken as the input where its rows are shifted to the left by one byte thanks to rot_word. Then sub_byte is performed on the key. Further XOR operations and parsing are performed on the new round key."
   },
   {
+    "objectID": "labs/lab7/lab7.html#debugging",
+    "href": "labs/lab7/lab7.html#debugging",
+    "title": "Lab 7",
+    "section": "Debugging",
+    "text": "Debugging\nI had two interesting bugs in this design that both involved counters. 1. Keeping track of the current round 2. Not driving the done bit for long enough\nI was using the current round count one clock cycle later than I intended. This proved disasterous because my key_expansion module depended on correctly tracking round to calculate the next round_key. This design used recursion to update the key which forced all of my outputs to be in contention since my expected round count was 1 increment behind the actual value.\nThe second bug was quite interesting because it was found in the AES_spi top module whereas the design worked fine in the AES_core module. The problem here was that the done bit was not being driven HIGH long enough to allow the entire cyphertext to be clocked and received by the other device. Simply fixing the bit range for done from 6 bits to 9 bits made the design work.\nThis lab took me around 20 hours to complete and it meets the proficiency standard."
+  },
+  {
     "objectID": "labs/lab5/lab5.html",
     "href": "labs/lab5/lab5.html",
     "title": "Lab 5",
@@ -207,7 +214,7 @@
     "href": "labs.html",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 7\n\n\n\n\n\nImplementing AES 128-bit Encryption in Hardware\n\n\n\n\n\nOct 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6\n\n\n\n\n\nReading temperature sensor data over SPI\n\n\n\n\n\nOct 23, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5\n\n\n\n\n\nUsing Interrupts to Detect a Motor’s Velocity\n\n\n\n\n\nOct 10, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4\n\n\n\n\n\nBare Metal Programming on an MCU to Produce Music\n\n\n\n\n\nOct 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3\n\n\n\n\n\nScanning and Debouncing a Keypad\n\n\n\n\n\nSep 19, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nSeven Segement Display and LED logic\n\n\n\n\n\nSep 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
+    "text": "Lab 7\n\n\n\n\n\nImplementing AES 128-bit Encryption\n\n\n\n\n\nOct 30, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6\n\n\n\n\n\nReading temperature sensor data over SPI\n\n\n\n\n\nOct 23, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5\n\n\n\n\n\nUsing Interrupts to Detect a Motor’s Velocity\n\n\n\n\n\nOct 10, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4\n\n\n\n\n\nBare Metal Programming on an MCU to Produce Music\n\n\n\n\n\nOct 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3\n\n\n\n\n\nScanning and Debouncing a Keypad\n\n\n\n\n\nSep 19, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2\n\n\n\n\n\nTime Multiplexing a Dual 7-Segment Display\n\n\n\n\n\nSep 13, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1\n\n\n\n\n\nSeven Segement Display and LED logic\n\n\n\n\n\nSep 3, 2024\n\n\nTroy Kaufman\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/lab1.html",

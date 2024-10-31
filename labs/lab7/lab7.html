@@ -8,7 +8,7 @@
 
 <meta name="author" content="Troy Kaufman">
 <meta name="dcterms.date" content="2024-10-30">
-<meta name="description" content="Implementing AES 128-bit Encryption in Hardware">
+<meta name="description" content="Implementing AES 128-bit Encryption">
 
 <title>Lab 7 – E155 Portfolio</title>
 <style>
@@ -126,7 +126,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#mixcolumns" id="toc-mixcolumns" class="nav-link" data-scroll-target="#mixcolumns">MixColumns</a></li>
   <li><a href="#keyexpansion" id="toc-keyexpansion" class="nav-link" data-scroll-target="#keyexpansion">KeyExpansion</a></li>
   </ul></li>
-  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
+  <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a>
+  <ul class="collapse">
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -140,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div>
   <div class="description">
-    Implementing AES 128-bit Encryption in Hardware
+    Implementing AES 128-bit Encryption
   </div>
 </div>
 <div class="quarto-title-meta">
@@ -229,9 +232,15 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Successful Prompt</figcaption>
 </figure>
 </div>
+<section id="debugging" class="level2">
+<h2 data-anchor-id="debugging">Debugging</h2>
+<p>I had two interesting bugs in this design that both involved counters. 1. Keeping track of the current <code>round</code> 2. Not driving the <code>done</code> bit for long enough</p>
+<p>I was using the current <code>round</code> count one clock cycle later than I intended. This proved disasterous because my <code>key_expansion</code> module depended on correctly tracking <code>round</code> to calculate the next <code>round_key</code>. This design used recursion to update the key which forced all of my outputs to be in contention since my expected <code>round</code> count was 1 increment behind the actual value.</p>
+<p>The second bug was quite interesting because it was found in the <code>AES_spi</code> top module whereas the design worked fine in the <code>AES_core</code> module. The problem here was that the <code>done</code> bit was not being driven HIGH long enough to allow the entire cyphertext to be clocked and received by the other device. Simply fixing the bit range for <code>done</code> from 6 bits to 9 bits made the design work.</p>
 <p>This lab took me around 20 hours to complete and it meets the proficiency standard.</p>
 
 
+</section>
 </section>
 </main></div>
     </div>
