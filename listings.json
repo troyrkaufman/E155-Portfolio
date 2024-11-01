@@ -1,19 +1,5 @@
 [
   {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/reflection7.html",
-      "/posts/reflection6.html",
-      "/posts/reflection5.html",
-      "/posts/lab4.html",
-      "/posts/lab3.html",
-      "/posts/lab2.html",
-      "/posts/lab1.html",
-      "/posts/week1_reflections.html",
-      "/posts/first-post.html"
-    ]
-  },
-  {
     "listing": "/labs.html",
     "items": [
       "/labs/lab7/lab7.html",
@@ -23,6 +9,21 @@
       "/labs/lab3/lab3.html",
       "/labs/lab2/lab2.html",
       "/labs/lab1/lab1.html"
+    ]
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/reflection8.html",
+      "/posts/reflection7.html",
+      "/posts/reflection6.html",
+      "/posts/reflection5.html",
+      "/posts/lab4.html",
+      "/posts/lab3.html",
+      "/posts/lab2.html",
+      "/posts/lab1.html",
+      "/posts/week1_reflections.html",
+      "/posts/first-post.html"
     ]
   }
 ]
