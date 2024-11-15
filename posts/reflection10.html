@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Troy Kaufman">
+<meta name="dcterms.date" content="2024-11-15">
+<meta name="description" content="Project is Underway">
 
-<title>E155 Blog – E155 Portfolio</title>
+<title>Reflection 10 – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +81,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -149,15 +92,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./labs.html"> 
+    <a class="nav-link" href="../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
 </ul>
@@ -179,14 +122,31 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">E155 Blog</h1>
+<h1 class="title">Reflection 10</h1>
 </div>
 
+<div>
+  <div class="description">
+    Project is Underway
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Troy Kaufman </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -196,353 +156,13 @@ window.Quarto = {
 </header>
 
 
+<p>Hello all! I recently finished an I2C setup to configure the camera module for the final project. I am skeptical about the camera module’s datasheet though. I need to setup the output data to be in VGA resolution (640x480 pixels) and in RGB565 format. The datasheet states that I need to perform windowing to get my specific resolution, however, the retailers (ArduCam) states that it already comes with a VGA resolution setting. I’m pretty confident I’m using the correct datasheet as there is only one OV2640 camera on the market. For now, I will use the datasheet as my guide.</p>
+<p>Today I’m going to setup the DMA with SPI. Hopefully everything works out. As for other aspects on the project, they have not been started yet. Hopefully my team members can start their parts soon because we are only 7 school days away from it being due.</p>
+<p>Overall things are going well right now. I’m feeling more relaxed due to the decreased workload in this course, but things outside of my microP world is starting to put some pressure on me. Hopefully everything goes well.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1731657600000" data-listing-file-modified-sort="1731693920821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="185">
-<div class="thumbnail">
-<p><a href="./posts/reflection10.html" class="no-external"></a></p><a href="./posts/reflection10.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection10.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection10.html" class="no-external">Reflection 10</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection10.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection10.html" class="no-external">Project is Underway</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection10.html" class="no-external">
-<div class="listing-date">
-Nov 15, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1730358000000" data-listing-file-modified-sort="1730492334836" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
-<div class="thumbnail">
-<p><a href="./posts/reflection9.html" class="no-external"></a></p><a href="./posts/reflection9.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection9.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection9.html" class="no-external">Reflection 9</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection9.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection9.html" class="no-external">Labs are Done and Celebrating!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection9.html" class="no-external">
-<div class="listing-date">
-Oct 31, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1729753200000" data-listing-file-modified-sort="1730425455512" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="221">
-<div class="thumbnail">
-<p><a href="./posts/reflection8.html" class="no-external"></a></p><a href="./posts/reflection8.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection8.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection8.html" class="no-external">Reflection 8</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection8.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection8.html" class="no-external">Finishing up Lab 6 and Looking Towards the Future</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection8.html" class="no-external">
-<div class="listing-date">
-Oct 24, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1729148400000" data-listing-file-modified-sort="1729231603630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
-<div class="thumbnail">
-<p><a href="./posts/reflection7.html" class="no-external"></a></p><a href="./posts/reflection7.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection7.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection7.html" class="no-external">Reflection 7</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection7.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection7.html" class="no-external">Image Processing Accelerator Ideation and Lab 6</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection7.html" class="no-external">
-<div class="listing-date">
-Oct 17, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1728889200000" data-listing-file-modified-sort="1729785624632" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="329">
-<div class="thumbnail">
-<p><a href="./posts/reflection6.html" class="no-external"></a></p><a href="./posts/reflection6.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection6.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection6.html" class="no-external">Reflection 6</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection6.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection6.html" class="no-external">Labs 4/5 going into fall break</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection6.html" class="no-external">
-<div class="listing-date">
-Oct 14, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1728284400000" data-listing-file-modified-sort="1728372536340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="391">
-<div class="thumbnail">
-<p><a href="./posts/reflection5.html" class="no-external"></a></p><a href="./posts/reflection5.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/reflection5.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reflection5.html" class="no-external">Reflection 5</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/reflection5.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/reflection5.html" class="no-external">General Thoughts About The Course Thus Far</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/reflection5.html" class="no-external">
-<div class="listing-date">
-Oct 7, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1727938800000" data-listing-file-modified-sort="1729223005126" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="264">
-<div class="thumbnail">
-<p><a href="./posts/lab4.html" class="no-external"></a></p><a href="./posts/lab4.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab4.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab4.html" class="no-external">Reflection 4</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab4.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab4.html" class="no-external">Music Playing MCU Bare Metal</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab4.html" class="no-external">
-<div class="listing-date">
-Oct 3, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1726729200000" data-listing-file-modified-sort="1729223011924" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="189">
-<div class="thumbnail">
-<p><a href="./posts/lab3.html" class="no-external"></a></p><a href="./posts/lab3.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab3.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab3.html" class="no-external">Reflection 3</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab3.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab3.html" class="no-external">Keypad Scanning</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab3.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1726210800000" data-listing-file-modified-sort="1729223018287" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="301">
-<div class="thumbnail">
-<p><a href="./posts/lab2.html" class="no-external"></a></p><a href="./posts/lab2.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab2.html" class="no-external">Reflection 2</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab2.html" class="no-external">Time Multiplexing a Dual 7-Segment Display</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab2.html" class="no-external">
-<div class="listing-date">
-Sep 13, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1725260400000" data-listing-file-modified-sort="1729223026051" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="193">
-<div class="thumbnail">
-<p><a href="./posts/lab1.html" class="no-external"></a></p><a href="./posts/lab1.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/lab1.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lab1.html" class="no-external">Reflection 1</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lab1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lab1.html" class="no-external">Configuring a 7-segment display and LEDs</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lab1.html" class="no-external">
-<div class="listing-date">
-Sep 2, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="reflection,labreport" data-listing-date-sort="1725001200000" data-listing-file-modified-sort="1725068386672" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
-<div class="thumbnail">
-<p><a href="./posts/week1_reflections.html" class="no-external"></a></p><a href="./posts/week1_reflections.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week1_reflections.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week1_reflections.html" class="no-external">Week 1 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week1_reflections.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week1_reflections.html" class="no-external">Built my development board and began to program in SystemVerilog</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week1_reflections.html" class="no-external">
-<div class="listing-date">
-Aug 30, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725392516990" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
-<div class="thumbnail">
-<p><a href="./posts/first-post.html" class="no-external"></a></p><a href="./posts/first-post.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/first-post.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/first-post.html" class="no-external">Hello Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/first-post.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/first-post.html" class="no-external">Week 1 Update</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/first-post.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Troy Kaufman
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
