@@ -1,0 +1,23 @@
+---
+title: "Reflection 10"
+description: "Project Is Finished!"
+author: "Troy Kaufman"
+date: "12/12/24"
+draft: false
+---
+
+The project is finally done. Unfortunately, we couldn't get the camera to work as intended so we had to scrap the majority of the MCUs functions. However, at the end of the day we were able to display an edge detected image on a monitor over VGA. I'm extremely proud of our team. I've worked around 100 to 110 hours...I'm not exaggerating. I bare metal programmed I2C and SPI protocols, DMA controller (harder than expected), interrupts, camera module configurations (still ongoing), and general preprocessing code to create the desired 3x3 kernel and grayscaling process.
+
+Configuring the DMA was difficult on the data reception section of the MCU because the camera module was a slave device that did not provide clock pulses. Therefore, I needed to use two DMA channels to directly interface with the camera where one channel would provide clock pulses and fifo read/dummy addresses while another one would store data received from the camera module. However, lots of timing issues were created due to the asynchronous nature of the DMA controller. To fix this, I timed both channels on a transaction completed event for the receiving DMA channel. This allowed me to start and stop the different DMA channels according to my preference. 
+
+Another bug I ran into was for the I2C peripheral. In my research, I noticed that the data line floats when unprovoked so I put the necessary pull up resistors on the lines. However, the MCU and camera module still weren't communicating correctly from what I saw on the logic analyzer. It turns out that I didn't configured the output pin to be in open drain mode. Open drain mode is used to faciliate a master device's desire to send LOW or HIGH level logic. If a low signal wants to be sent, the internal FET will be activated forcing current to be shorted to ground. On the otherhand, the FET will not be activated allowing current to flow into the internal buffers letting the external/internal pull up resistors to drive the signal HIGH. 
+
+Overall, I'm extremely happy with how much I've learned from this course. I've always said this about the course: "You get as much out of the course as you put into it". It's bittersweet that the semester is ending already. I've trauma bonded with many of the micrioP students in the lab. I don't think I will ever learn as much in a class ever again. Yes, this was an extremely difficult and time consuming class, but I loved it!!! 
+
+Henry, one of the microP grutors, gave me my other favorite quote of the semester: "MicroPs is the class always on your mind even when you force it out...it always creeps back. MicroPs is a debugging masterclass". 
+
+It always seemed that I was inside the lab at any given time of the day. I was in there so much that many of the engineering assistants and I became familiar with each other. My friends would come visit me late at night/early morning hours on the weekends as well as my girlfriend to keep me company. 
+
+My favorite part of the class was dealing with digital design aspects. I loved lab 3 (keypad scanning) and lab 7(implementing AES encryption) the most because of the complex digital thinking. Both of these labs forced me to think as a hardware designer. After taking this course, I firmly believe I want to work in digital design in my career!
+
+This is a final goodbye to my favorite course of all time!!!

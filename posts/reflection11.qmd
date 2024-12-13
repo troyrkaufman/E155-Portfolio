@@ -1,0 +1,18 @@
+---
+title: "Reflection 11"
+description: "Project Underway Part 2"
+author: "Troy Kaufman"
+date: "12/6/24"
+draft: false
+---
+
+We're on the final stretch of the project. I'm still having trouble correctly configuring the camera for consistent and valid outputs. I've tried to manually configure and use a modified library for the camera to no avail. My confidence in using the product for our design dropped to near zero when I found that there were conflicting statements within the documentation for the camera module. For example, the camera module's vendor, ArduCAM, had documentation that stated the clock phase for the module was set at 0, however, a link to another part of the documentation stated that it should be set at 1. Additionally, the documentation linked to us for the camera module on ArduCAM's website was for a different model. We had to dig into the haystack heystack and find the needle. Eventually we found the correct manual, but it was time consuming and frustrating process. 
+
+I've correctly setup the double buffer system in addition to the DMA channels for data reception and transmission. I tested the data reception portion by statically feeding the input pin with the power line. I traversed buffers in memory and watch the stack of data be transfered correctly. 
+
+All that's left to do it write a nested for loop to properly traverse a VGA resolution image to produce the necessary 3x3 kernal needed for edge detection. If I don't get the camera working properly over the next couple of days, I might need to scrap this portion of the project and directly store an image in the MCU's SRAM. This would be very unfortunate because all of my hard work that went into designing the entire MCU/FPGA based system, setting up I2C, DMA, interrupts, and the many hours in configuring the camera would of all been for nothing. 
+
+Despite this, I've learned so much from handling the MCU in the project. I feel confident in my ability in digital design, and so I jusitifed it to myself that I should handle the MCU. I don't regret this decision, but I do miss playing around with hardware. I touched the edge detection algorithm for a bit in laying out the design as well as debugging a good portion of it, but I wish I did more with the FPGA. Oh well. 
+
+
+

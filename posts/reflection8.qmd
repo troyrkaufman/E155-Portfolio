@@ -1,0 +1,13 @@
+---
+title: "Reflection 8"
+description: "Finishing up Lab 6 and Looking Towards the Future"
+author: "Troy Kaufman"
+date: "10/24/24"
+draft: false
+---
+
+The SPI temperature lab has wrapped up nicely after a simple hardware bug was fixed. This was a satisfying lab with a good introduction to using a logic analyzer. I've used Vivado's internal logic analyzer in the past, and it was an absolute pain to use. I thought that using a hardware LA might be better and thankfully I was right!!! I'll definitely be using logic analyzers more in the future because of their flexibilty. 
+
+As I begin to work on the last lab, I'm looking toward to the project and how my time will be spent on it. I have spent around 140 hours in the past two months working on the various labs. I have contributed a great deal of my time towards this class, and I don't regret it. However, I need to manage my time better with this class. I've been thinking of a plan to bring this to fruition: draw out plans early in the morning every other day then implement the idea for up to three hours later in the day. 
+
+I know that my project requires me to do a lot of work, but I think scheduling designated times for working on the project will be beneificial for my mindset and other aspects of my life. I can't wait to start ont he project!!!

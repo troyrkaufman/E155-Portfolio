@@ -1,6 +1,6 @@
 ---
 title: "Lab 7"
-description: "Implementing AES 128-bit Encryption in Hardware"
+description: "Implementing AES 128-bit Encryption"
 author: "Troy Kaufman"
 date: "10/30/24"
 draft: false
@@ -52,6 +52,15 @@ The AES in collaboration with SPI testbench works as well. The created created c
 ![Successful AES SPI Waveform](images/lab7_spi_waveform.PNG)
 
 ![Successful Prompt](images/spi_test_lab7_works_text.PNG)
+
+## Debugging
+I had two interesting bugs in this design that both involved counters.
+1. Keeping track of the current `round`
+2. Not driving the `done` bit for long enough
+
+I was using the current `round` count one clock cycle later than I intended. This proved disasterous because my `key_expansion` module depended on correctly tracking `round` to calculate the next `round_key`. This design used recursion to update the key which forced all of my outputs to be in contention since my expected `round` count was 1 increment behind the actual value. 
+
+The second bug was quite interesting because it was found in the `AES_spi` top module whereas the design worked fine in the `AES_core` module. The problem here was that the `done` bit was not being driven HIGH long enough to allow the entire cyphertext to be clocked and received by the other device. Simply fixing the bit range for `done` from 6 bits to 9 bits made the design work. 
 
 This lab took me around 20 hours to complete and it meets the proficiency standard.
 

@@ -1,0 +1,13 @@
+---
+title: "Reflection 10"
+description: "Project is Underway"
+author: "Troy Kaufman"
+date: "11/15/24"
+draft: false
+---
+
+Hello all! I recently finished an I2C setup to configure the camera module for the final project. I am skeptical about the camera module's datasheet though. I need to setup the output data to be in VGA resolution (640x480 pixels) and in RGB565 format. The datasheet states that I need to perform windowing to get my specific resolution, however, the retailers (ArduCam) states that it already comes with a VGA resolution setting. I'm pretty confident I'm using the correct datasheet as there is only one OV2640 camera on the market. For now, I will use the datasheet as my guide.
+
+Today I'm going to setup the DMA with SPI. Hopefully everything works out. As for other aspects on the project, they have not been started yet. Hopefully my team members can start their parts soon because we are only 7 school days away from it being due. 
+
+Overall things are going well right now. I'm feeling more relaxed due to the decreased workload in this course, but things outside of my microP world is starting to put some pressure on me. Hopefully everything goes well. 

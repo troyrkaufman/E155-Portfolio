@@ -1,0 +1,15 @@
+---
+title: "Reflection 9"
+description: "Labs are Done and Celebrating!"
+author: "Troy Kaufman"
+date: "10/31/24"
+draft: false
+---
+
+Happy Halloween!!!It's been a very fun week thus far. I completed lab 7 marking the end of the lab section of the course! I knew that this course was the most difficult class at Harvey Mudd, but I didn't realize how much time I would invest into the class. I've grown so much these past two months. 
+
+A handful of others including myself decided to host an event to celebrate the end of a gruelling two and a half months of work. It was microP themed with all the bells and whistles. I will add that our event was better than the competition...microPs for the win!!!
+
+This upcoming week, I will be implementing I2C on the MCU to configure a camera module for the project. Additionally, I will look into how DMA works to get ahead of schedule a little bit. This project has a lot of moving parts, and I fear that we might not finish this project in time. Fortunately, Vikram and I were able to get Joesph on our team so hopefully this lightens the load on us. 
+
+Overall, I'm feeling relaxed at this point in the semester and confident in my ability to program embedded systems. 
