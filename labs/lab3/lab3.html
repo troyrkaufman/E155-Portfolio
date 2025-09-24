@@ -117,9 +117,18 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
   <ul>
-  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#key-achievements" id="toc-key-achievements" class="nav-link" data-scroll-target="#key-achievements">Key Achievements</a></li>
+  </ul></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
+  <ul class="collapse">
+  <li><a href="#how-the-keypad-works" id="toc-how-the-keypad-works" class="nav-link" data-scroll-target="#how-the-keypad-works">How the Keypad Works</a></li>
+  <li><a href="#my-design" id="toc-my-design" class="nav-link" data-scroll-target="#my-design">My Design</a></li>
+  </ul></li>
+  <li><a href="#debugging-challenges" id="toc-debugging-challenges" class="nav-link" data-scroll-target="#debugging-challenges">Debugging Challenges</a></li>
   <li><a href="#verification" id="toc-verification" class="nav-link" data-scroll-target="#verification">Verification</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -151,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
   </div>
 </header> <div class="about-links">
-  <a href="https://github.com/troyrkaufman/e155_lab3/tree/main/src" class="about-link" rel="" target="">
+  <a href="https://github.com/troyrkaufman/e155_lab3/tree/main/" class="about-link" rel="" target="">
     <i class="bi bi-github"></i>
      <span class="about-link-text">Github</span>
   </a>
@@ -164,55 +173,91 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Lab 3 Setup</figcaption>
 </figure>
 </div>
+<p><a href="https://youtube.com/shorts/AxNCW6z_a80?feature=share">Watch Demo on YouTube</a></p>
 <section id="summary" class="level1">
 <h1>Summary</h1>
-<p>The third digital design installation in microPs involved scanning a keypad and presenting the most recently pressed key on the right side of a dual 7-segment display with the number on the left displaying the previous key pressed. The purpose for this lab was to expose students to a complex digital system with many seqeuntial and combinational elements. Additionally, the lab forced students to use oscilloscopes to fix the many timing problems that they would encounter during the debugging phase. To complete this lab, I created a design that would scan through the keypad’s columns allowing the rows to input voltages to the FPGA to be properly detected and decoded. Although this sounds simple, it was not.</p>
+<p>The third digital design lab in microPs involved implementing a keypad scanner and displaying the most recently pressed key on the right side of a dual 7-segment display, with the previously pressed key shown on the left. The objective of this lab was to expose students to a complex digital system that integrates both sequential and combinational logic. A secondary goal was to develop debugging skills by using an oscilloscope to diagnose timing-related issues.</p>
+<p>To complete the assignment, I designed a scanner FSM that cycles through keypad columns, detects pressed keys via the row lines, and decodes the corresponding value. While conceptually simple, the design presented multiple challenges that required extensive debugging and verification.</p>
+<section id="key-achievements" class="level2">
+<h2 data-anchor-id="key-achievements">Key Achievements</h2>
+<ul>
+<li>Implemented a <strong>column-driven keypad scanner</strong>: only one column is driven LOW at a time, while the others remain HIGH. When a key is pressed, the active column is shorted through the switch to its corresponding row, allowing the FPGA to detect the key press.<br>
+</li>
+<li>Designed a <strong>robust debouncer FSM</strong> to eliminate switch bounce and ensure only one valid press is registered per actuation.<br>
+</li>
+<li>Resolved the <strong>multi-key press issue</strong>: pressing two keys in the same column does not lock up the system or cause invalid states.<br>
+</li>
+<li>Fixed logic-level problems by moving from an initial pull-down design (which failed to meet VIH levels) to a pull-up configuration compatible with FPGA thresholds.<br>
+</li>
+<li>Debugged <strong>active-LOW vs.&nbsp;active-HIGH polarity errors</strong>, which caused frozen display states until corrected.<br>
+</li>
+<li>Achieved seamless integration with the <strong>time-multiplexed 7-segment display system</strong> from Lab 2, reusing prior work efficiently.<br>
+</li>
+<li>Verified correctness with <strong>testbenches and waveform analysis</strong>, validating each FSM, the decoder, and the overall system.</li>
+</ul>
+</section>
 </section>
 <section id="design" class="level1">
 <h1>Design</h1>
-<p>Essentially, the scanner FSM will detect a key press and send output signals to the keypad’s columns and to the keypad decoder to preserve the current key press. While the key is still pressed, a keypad decoder decodes the key that was pushed. To verify the key push, a debouncer FSM debounces the row input signal to avoid double counting due to the switch bouncing phenomena. After the key pushed is verified to be an actual key push, the previous number gets the current number and the current number pressed is updated to the key that was pushed. These two two numbers are then sent to the time multiplexing system that displays the current number pressed on the right of the display and the previous number on the left. The block diagram for this is shown below.</p>
+<section id="how-the-keypad-works" class="level2">
+<h2 data-anchor-id="how-the-keypad-works">How the Keypad Works</h2>
+<p>A 4×4 matrix keypad consists of rows and columns of switches. Each key connects a specific row to a column when pressed. In this design:<br>
+- The FPGA drives the <strong>columns</strong>, holding all HIGH except one at a time, which is driven LOW.<br>
+- The <strong>rows</strong> are read as inputs with pull-up resistors.<br>
+- If a key in the active column is pressed, the LOW signal propagates through the switch, pulling the corresponding row input LOW.<br>
+- By combining the active column index and the detected row, the pressed key can be uniquely identified.</p>
+</section>
+<section id="my-design" class="level2">
+<h2 data-anchor-id="my-design">My Design</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/lab3_block_diagram.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/lab3-block-diagram-1.jpg" class="img-fluid figure-img"></p>
 <figcaption>System Block Diagram</figcaption>
 </figure>
 </div>
-<p>I created this design by first deciding that my keypad would be oriented in a pull-up resistor fashion where the row inputs would be pulled to Vcc at all times until an event occurs. I then created the scanner FSM that would rotate a LOW voltage on one column at a time while the rest were driven HIGH. Thus if a key was pressed, the current column that was set LOW would send this LOW voltage across the SPDT switch that was pushed down enabling a LOW voltage to be read on that associated row. This grounding effect overpowers the weak internal pull-up resistor on the rows allowing a valid logic level voltage to be read. The electrical schematic for the system is shown below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab3_sch.jpg" class="img-fluid figure-img"></p>
-<figcaption>Electrical Schematic</figcaption>
-</figure>
-</div>
-<p>It is important to mention that the scanner FSM toggles the LOW and HIGH column voltage. When a key is pressed, all columns are driven LOW to avoid potential contention scenarios. On the otherhand when no key push is detected, all columns are toggled HIGH except for one to scan the keypad. In addition to this, the FSM sends an encoded column signal to a combinational keypad decoder module to properly decode the key press. Below is the state transition diagram for the scanner FSM.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab3_scanner_std.jpg" class="img-fluid figure-img"></p>
-<figcaption>Scanner FSM STD</figcaption>
-</figure>
-</div>
-<p>This encoded column signal is bit swizzled along with the row input to check for specifc combination cases for keys. If a condition is verified, the key pushed is assigned the proper number along with a flag signal, row_bit, that is sent to the debouncer. If a key is pressed and held down, the key flag is still driven HIGH to keep the keypad from bumping the current number to the previous number.</p>
-<p>The debouncer FSM takes in the row input signal that was pressed down on. This module recieves the key flag and steps into the first state to begin the counting phase. When enough clock cycles have passed, an enable signal is driven HIGH and sent to the next module that updates the current number and previous number. To prevent accidental double counting, the pulsed enable signal is driven HIGH for only one clock cycle. The state transition diagram for this FSM can be seen below along with a signal diagram.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab3_debouncer_std.jpg" class="img-fluid figure-img"></p>
-<figcaption>Debouncer FSM STD</figcaption>
-</figure>
-</div>
-<p>The design updates the current and previous number through simple sequential logic. Before the current number is updated to the key pushed, the previous number gets the current number. This situation is only every carried out when the pulsed enable signal is HIGH.</p>
-<p>Finally, the updated current number and previous number is sent to the time multiplexing system built from lab 2. The numbers are shown on the 7-segment display on their respective sides. These numbers are illuminated every 60 clock cycles where they alternate on every set of 60 meaning that while one side is displayed, the other is turned off. This is due to the nature of the time multiplexing system where only one 7-segment decoder is used.</p>
-<p>Although syncrhonizers have not been implemented yet, they will be put in shortly in the coming week to further mitigate metastability in the system.</p>
-<p>Overall, the design meets the proficiency requirements. In the coming week, I will update the system to meet the excellence requirement. A shocking ~50 hours were spent on this lab. The first half of this involved not realizing that my original pull-down design for the keypad did not meet the logic level requirements for the FPGA. LOW signals would be interpreted as LOW signals, however, HIGH signals would never make it past the VIL logic level of 0.8 volts. This permanently froze the system at “00” on the display making it quite a difficult and frustrating problem to debug because the simulations showed that there should be number changes. My next short coming that led to the ridiculous amount of hours spent on the lab was confusing the active LOW logic with active HIGH at times. This led to me outputting incorrect values to the keypad’s columns creating once again a frozen system on the display. Hours of probing eventually made me realize my mistake. The last major bug that contributed to the ~50 hour effort was the keypad bumping scenario mentioned near the beginning of the design section. When a key was pressed and if the user pressed another key in a different row and in any of the columns then released the most recent key pushed, the previous number would updated to the current number. The problem here was that the key flag was being reset to zero when a key release was detected thus resetting the debouncer counter. As a result, unwanted pulsed enable signals were updating the current and previous numbers to the key that was still pressed. Putting a conditional statement within the default of a case statement fixed this issue.</p>
+<p>The system is organized into several interacting modules:</p>
+<ul>
+<li><p><strong>Scanner FSM</strong>: Drives column outputs and detects key presses. It toggles one column LOW at a time while others are held HIGH. If a key is pressed, the LOW propagates through the switch to a row input, overriding the weak pull-up and registering as a valid logic LOW. When a press is detected, all columns are driven LOW to avoid contention. The FSM also generates an encoded column signal for the decoder.<br>
+<img src="images/lab3_scanner_std.jpg" class="img-fluid" alt="Scanner FSM STD"></p></li>
+<li><p><strong>Keypad Decoder</strong>: Combines the row input with the encoded column signal to identify which key was pressed. If a valid combination is found, the decoder assigns the correct key value and asserts a <code>row_bit</code> flag.</p></li>
+<li><p><strong>Debouncer FSM</strong>: Receives the <code>row_bit</code> signal to verify a stable press. It enters a counting phase, and after sufficient cycles, generates a single-cycle enable pulse. This pulse prevents switch-bounce artifacts and accidental double counting.<br>
+<img src="images/lab3_debouncer_std.jpg" class="img-fluid" alt="Debouncer FSM STD"></p></li>
+<li><p><strong>Slide State Logic</strong>: Updates the display registers when the enable pulse arrives. The previous number is updated with the current value, and the current number is overwritten with the new key.</p></li>
+<li><p><strong>Time-Multiplexed Display</strong>: Reuses the 7-segment decoder from Lab 2. The current and previous numbers are alternately displayed at 60-cycle intervals, giving the illusion of simultaneous illumination.</p></li>
+<li><p><strong>Electrical Design Choices</strong>: I implemented a pull-up configuration on the row inputs. This required careful handling of logic thresholds—particularly ensuring that LOWs were registered correctly by the FPGA while HIGHs exceeded the required VIH level.<br>
+<img src="images/lab3_sch.jpg" class="img-fluid" alt="Electrical Schematic"></p></li>
+</ul>
+</section>
+</section>
+<section id="debugging-challenges" class="level1">
+<h1>Debugging Challenges</h1>
+<p>This lab required ~50 hours of effort due to several design pitfalls:</p>
+<ol type="1">
+<li><p><strong>Pull-down vs.&nbsp;Pull-up configuration</strong>: My initial pull-down design failed to satisfy FPGA VIH logic thresholds, causing the system to freeze at “00”. Simulation passed, but hardware consistently failed, requiring extensive probing to uncover.</p></li>
+<li><p><strong>Active-LOW vs.&nbsp;Active-HIGH confusion</strong>: At times I mistakenly drove incorrect values to the keypad columns. This also caused frozen displays until corrected.</p></li>
+<li><p><strong>Key bumping scenario</strong>: Releasing one key while holding another caused incorrect updates to the previous/current number registers. The root cause was the reset of the key flag upon release, which restarted the debouncer. Adding a conditional check in the FSM case default resolved this issue.</p></li>
+</ol>
+<p>These challenges underscored the importance of carefully managing signal polarity, logic thresholds, and FSM edge cases in digital design.</p>
 </section>
 <section id="verification" class="level1">
 <h1>Verification</h1>
-<p>To verify my design, I created testbenches and manually checked the waveforms for correctness.</p>
-<p>The scanner FSM received clock, reset, and row input signals. Based off of the current column signal output to the keypad, the FSM will either continue to scan or enter the pressed/released states. <img src="images/lab3_scanner_sim.jpg" class="img-fluid" alt="Scanner FSM Unit Verification"></p>
-<p>The keypad decoder module receives the following 4 bit signals: column signal ouput to the keypad, an encoded column signal to be decoded, and a row signal. If one of the eight combinations are reached, the keypad decoder will update the key pushed value and send a row bit output as a HIGH logic value. If a combination goes to the default case, a conditional statement is reached and will check the column signals outputted to the keypad. If the logic sees that a key is still being pressed, the row bit signal will continue to be asserted HIGH and LOW otherwise. <img src="images/lab3_keypad_decoder_sim.jpg" class="img-fluid" alt="Keypad Decoder Unit Verification"></p>
-<p>The debouncer FSM recieves a clock, reset, and row bit input. When the system detects a HIGH value for the row bit, a counter starts. If the counter reaches the desired threshold, the pulse enabled signal will be driven HIGH for one clock cyle and LOW otherwise. If the row bit continues to be HIGH after this, the counter will not start back up and a LOW output will be driven through the pulse enabled wire. <img src="images/lab3_debouncer.jpg" class="img-fluid" alt="Debouncer FSM Unit Verfification"></p>
-<p>The slide state module receives a clock, reset, pulsed enabled input, and the 4 bit key pushed signals. On the rising edge of the clock, a conditional statement check if the pulsed enabled input is set HIGH. If so, the previous number will be updated to the current number. Then, the current number will get the key pushed value.<br>
-<img src="images/lab3_slide_state_sim.jpg" class="img-fluid" alt="Slide State Unit Verfification"></p>
-<p>This is the system simulation. In yellow is the current state for the scanner FSM. In purple is the key that was pushed. In cyan are the current number and previous number values. My design works for all inputs into the system. All requirements were met for proficiency. <img src="images/lab3_system_sim_normal.jpg" class="img-fluid" alt="Successful System Simulation"></p>
+<p>I verified each subsystem with targeted testbenches and waveform inspection:</p>
+<ul>
+<li><p><strong>Scanner FSM</strong>: Correctly cycled through columns and entered press/release states.<br>
+<img src="images/lab3_scanner_sim.jpg" class="img-fluid" alt="Scanner FSM Unit Verification"></p></li>
+<li><p><strong>Keypad Decoder</strong>: Produced valid key outputs when column/row combinations matched, and correctly held the <code>row_bit</code> high if a key remained pressed.<br>
+<img src="images/lab3_keypad_decoder_sim.jpg" class="img-fluid" alt="Keypad Decoder Unit Verification"></p></li>
+<li><p><strong>Debouncer FSM</strong>: Generated a clean one-cycle enable pulse after the threshold count, preventing double counts.<br>
+<img src="images/lab3_debouncer.jpg" class="img-fluid" alt="Debouncer FSM Unit Verfification"></p></li>
+<li><p><strong>Slide State Logic</strong>: Correctly shifted current-to-previous and loaded the new key on each enable pulse.<br>
+<img src="images/lab3_slide_state_sim.jpg" class="img-fluid" alt="Slide State Unit Verfification"></p></li>
+<li><p><strong>System Simulation</strong>: Verified correct operation across all inputs. The scanner FSM (yellow), decoded key (purple), and current/previous numbers (cyan) matched expectations. All proficiency requirements were met.<br>
+<img src="images/lab3_system_sim_normal.jpg" class="img-fluid" alt="Successful System Simulation"></p></li>
+</ul>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This lab reinforced the challenges of implementing real-world digital systems where simulation may not expose all hardware pitfalls. I gained valuable experience debugging with oscilloscopes, reasoning about logic thresholds, and designing robust FSMs for noisy inputs. The final design met all requirements and provided a strong foundation for building more reliable FPGA systems.</p>
 
 
 </section>
