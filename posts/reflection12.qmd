@@ -1,12 +1,12 @@
 ---
-title: "Reflection 10"
+title: "Reflection 12"
 description: "Project Is Finished!"
 author: "Troy Kaufman"
 date: "12/12/24"
 draft: false
 ---
 
-The project is finally done. Unfortunately, we couldn't get the camera to work as intended so we had to scrap the majority of the MCUs functions. However, at the end of the day we were able to display an edge detected image on a monitor over VGA. I'm extremely proud of our team. I've worked around 100 to 110 hours...I'm not exaggerating. I bare metal programmed I2C and SPI protocols, DMA controller (harder than expected), interrupts, camera module configurations (still ongoing), and general preprocessing code to create the desired 3x3 kernel and grayscaling process.
+The project is finally done. Unfortunately, we couldn't get the camera to work as intended so we had to scrap the majority of the MCUs functions. However, at the end of the day we were able to display an edge detected image on a monitor over VGA. I'm extremely proud of our team. I've worked around 80 hours on the project if not more. I bare metal programmed I2C and SPI protocols, DMA controller (harder than expected), interrupts, camera module configurations (still ongoing), and general preprocessing code to create the desired 3x3 kernel and grayscaling process. Additionally, I helped design the edge detection algorithm and debugged some of that code. 
 
 Configuring the DMA was difficult on the data reception section of the MCU because the camera module was a slave device that did not provide clock pulses. Therefore, I needed to use two DMA channels to directly interface with the camera where one channel would provide clock pulses and fifo read/dummy addresses while another one would store data received from the camera module. However, lots of timing issues were created due to the asynchronous nature of the DMA controller. To fix this, I timed both channels on a transaction completed event for the receiving DMA channel. This allowed me to start and stop the different DMA channels according to my preference. 
 
